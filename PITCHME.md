@@ -1,5 +1,16 @@
-## sdfasdfasdf
+# Natural Language Processing with spaCy in R
 
+## Ana Mamatelashvili 
+
+
+@snap[south-west span 20]
+18 June, 2019
+@snapend
 ---
 
 # afasdfasdfasdf 
+
+---
+
+
+There are many natural language processing libraries out there and each has it's own advantages. One of Ana's favourites is spaCy because of it's speed and user-friendliness. In this talk she will discuss how to leverage spaCy's powerful features with the spacyr package and combine them with other packages such as tidytext, quanteda and coreNLP to do natural language processing in R. She will discuss use cases for tokenisation, lemmatisation, extraction of linguistic features and named entities as well as Coreference Resolution.
