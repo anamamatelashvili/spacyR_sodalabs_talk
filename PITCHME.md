@@ -56,7 +56,7 @@ will install miniconda and python and spacy and run them in the background
 ---
 # Preprocessing 
 ## Tokenisation
-```{r}
+```r
 text <- "Explosion AI made spaCy for natural language processing 
          (2+ years-ago). It's a nice library."
 tokenised <- spacy_tokenize(text, what = "word", remove_punct = TRUE,
@@ -75,13 +75,13 @@ tokenised
 ---
 # Preprocessing 
 ## Lemmatisation
-```{r}
+```r
 lemmatised <- spacy_parse(text, pos = FALSE, tag = FALSE, lemma = TRUE,
             entity = FALSE, dependency = FALSE, nounphrase = FALSE,
             multithread = TRUE)
 lemmatised %>% filter(token != lemma)
 #  doc_id sentence_id token_id     token     lemma
-# 1  text1           1        1 Explosion explosion
+#1  text1           1        1 Explosion explosion
 #2  text1           1        3      made      make
 #3  text1           1        4     spaCy     spacy
 #4  text1           1       12     years      year
