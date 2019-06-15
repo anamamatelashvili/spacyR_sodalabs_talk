@@ -38,7 +38,7 @@ highlight : github
 transition : fade
 
 slide-number : true
-#vertical-center : false
+vertical-center : false
 
 
 remote-control: true
