@@ -1,7 +1,8 @@
+@snap[center]
 # Natural Language Processing with spaCy in R
 
 ## Ana Mamatelashvili 
-
+@snapend
 
 @snap[south-west span 20]
 18 June, 2019
