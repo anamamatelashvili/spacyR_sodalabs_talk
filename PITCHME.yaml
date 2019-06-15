@@ -1,2 +1,48 @@
+# The default settings below are optimized for this template.
+# Override settings with your own custom values as needed.
+#
+# For further details, see https://gitpitch.com/docs/settings.
+#
+
+published : true
+
+#
+# Theme Setting
+# Doc: https://gitpitch.com/docs/settings/theme
+#
 theme : white
-layout : top-left
+
+#
+# Theme-Override Setting
+# Doc: https://gitpitch.com/docs/settings/custom-theme
+#
+theme-override : PITCHME.css
+
+#
+# Footnote Setting
+# Doc: https://gitpitch.com/docs/settings/footnote
+#
+footnote : "@EliizaAI @nushkee"
+
+#
+# Highlight (Code) Setting
+# Doc: https://gitpitch.com/docs/settings/highlight
+#
+highlight : github
+
+#
+# Layout Setting
+# Doc: https://gitpitch.com/docs/settings/layout
+#
+layout : center
+
+#
+# Transition Setting
+# This template uses GitPitch Snap-Layouts extensively. For this
+# reason THIS VALUE SHOULD NOT BE MODIFIED. See:
+# https://gitpitch.com/docs/layout-features/snap-layout-slide-transitions
+#
+transition : fade
+
+slide-number : true
+vertical-center : false
