@@ -1,4 +1,4 @@
-@snap[center]
+@snap[midpoint span 80]
 # Natural Language Processing with spaCy in R
 
 ## Ana Mamatelashvili 
