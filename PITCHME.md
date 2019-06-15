@@ -4,7 +4,7 @@
 ## Ana Mamatelashvili 
 @snapend
 
-@snap[south-east span-20]
+@snap[south-east span-30]
 18 June, 2019
 @snapend
 ---
