@@ -4,8 +4,6 @@
 # For further details, see https://gitpitch.com/docs/settings.
 #
 
-published : true
-
 #
 # Theme Setting
 # Doc: https://gitpitch.com/docs/settings/theme
@@ -30,11 +28,6 @@ footnote : "@EliizaAI @nushkee"
 #
 highlight : github
 
-#
-# Layout Setting
-# Doc: https://gitpitch.com/docs/settings/layout
-#
-layout : center-right
 
 #
 # Transition Setting
@@ -46,3 +39,13 @@ transition : fade
 
 slide-number : true
 vertical-center : false
+
+
+remote-control: true
+published : false
+
+#
+# Layout Setting
+# Doc: https://gitpitch.com/docs/settings/layout
+#
+layout : center-right
