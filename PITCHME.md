@@ -81,7 +81,7 @@ lemmatised <- spacy_parse(text, pos = FALSE, tag = FALSE, lemma = TRUE,
             multithread = TRUE)
 lemmatised %>% filter(token != lemma)
 #  doc_id sentence_id token_id     token     lemma
-#[1]  text1           1        1 Explosion explosion
+# 1  text1           1        1 Explosion explosion
 #2  text1           1        3      made      make
 #3  text1           1        4     spaCy     spacy
 #4  text1           1       12     years      year
