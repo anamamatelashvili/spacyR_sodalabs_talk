@@ -8,13 +8,13 @@
 # Theme Setting
 # Doc: https://gitpitch.com/docs/settings/theme
 #
-theme : white
+#theme : white
 
 #
 # Theme-Override Setting
 # Doc: https://gitpitch.com/docs/settings/custom-theme
 #
-theme-override : PITCHME.css
+#theme-override : PITCHME.css
 
 #
 # Footnote Setting
@@ -38,7 +38,7 @@ highlight : github
 transition : fade
 
 slide-number : true
-vertical-center : false
+#vertical-center : false
 
 
 remote-control: true
