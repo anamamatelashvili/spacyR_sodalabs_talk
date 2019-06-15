@@ -1,10 +1,10 @@
-@snap[midpoint span 100]
-# Natural Language Processing with spaCy in R
 
+# Natural Language Processing with spaCy in R
+@snap[east span-100]
 ## Ana Mamatelashvili 
 @snapend
 
-@snap[south-east span 20]
+@snap[south-east span-20]
 18 June, 2019
 @snapend
 ---
