@@ -79,18 +79,15 @@ tokenised
 lemmatised <- spacy_parse(text, pos = FALSE, tag = FALSE, lemma = TRUE,
             entity = FALSE, dependency = FALSE, nounphrase = FALSE,
             multithread = TRUE)
-lemmatised[1:3,]
+lemmatised %>% filter(token != lemma)
 #  doc_id sentence_id token_id     token     lemma
 #1  text1           1        1 Explosion explosion
-#2  text1           1        2        AI        AI
-#3  text1           1        3      made      make
+#2  text1           1        3      made      make
+#3  text1           1        4     spaCy     spacy
+#4  text1           1       12     years      year
+#5  text1           2        1        It    -PRON-
+#6  text1           2        2        's        be
 ```
-@ul
-- spaCy &rarr; spacy
-- years &rarr; year
-- It &rarr; -PRON-
-- 's &rarr; be
-@ulend
 
 ---
 # preprocessing
