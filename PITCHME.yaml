@@ -14,7 +14,7 @@ theme : white
 # Theme-Override Setting
 # Doc: https://gitpitch.com/docs/settings/custom-theme
 #
-#theme-override : PITCHME.css
+theme-override : PITCHME.css
 
 #
 # Footnote Setting
@@ -42,7 +42,7 @@ vertical-center : false
 
 
 remote-control: true
-published : false
+published : true
 
 #
 # Layout Setting
