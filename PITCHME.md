@@ -54,12 +54,26 @@ will install miniconda and python and spacy and run them in the background
 @ulend
 
 ---
-# preprocessing 
- tokenisation, sentence segmentation, 
+# Preprocessing 
+## Tokenisation
+```{r}
+text <- "Ines Montani made spaCy for natural language processing (2+ years-ago). 
+        It's a nice library."
+tokenised <- spacy_tokenize(text, what = "word", remove_punct = TRUE,
+               remove_url = FALSE, remove_numbers = TRUE,
+               remove_separators = TRUE, remove_symbols = FALSE, padding = TRUE,
+               multithread = TRUE, output = "list")
+tokenised
+#$text1
+# [1] "Ines"       "Montani"    "made"       "spaCy"      "for"        "natural"    "language"  
+# [8] "processing" ""           ""           "+"          "years"      ""           "ago"       
+#[15] ""           ""           ""           "It"         "'s"         "a"          "nice"      
+#[22] "library"    ""  
+```
  
 ---
-# preprocessing 
-lemmatisation
+# Preprocessing 
+## Lemmatisation
 
 ---
 # preprocessing
