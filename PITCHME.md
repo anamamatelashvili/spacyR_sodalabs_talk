@@ -8,9 +8,9 @@
 18 June, 2019
 @snapend
 ---
-
-# afasdfasdfasdf 
-
+@snap[midpoint span-40]
+# A bit about me 
+@snapend
 ---
 
 
