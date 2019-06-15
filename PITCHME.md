@@ -8,7 +8,7 @@
 18 June, 2019
 @snapend
 ---
-@snap[midpoint span-40]
+@snap[midpoint span-50]
 # A bit about me 
 @snapend
 ---
