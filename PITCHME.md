@@ -28,7 +28,7 @@ will focus on text processing
 # Challenges of text processing 
 
 @ul
-- 
+- jhgfjhgf
 @ulend
 
  
@@ -76,6 +76,8 @@ tokenised
 # Preprocessing 
 ## Lemmatisation
 ```r
+text <- "Explosion AI made spaCy for natural language processing 
+         (2+ years-ago). It's a nice library."
 lemmatised <- spacy_parse(text, pos = FALSE, tag = FALSE, lemma = TRUE,
             entity = FALSE, dependency = FALSE, nounphrase = FALSE,
             multithread = TRUE)
@@ -90,10 +92,27 @@ lemmatised %>% filter(token != lemma)
 ```
 
 ---
-# preprocessing
+# Preprocessing
+## Stopwords
+```r
+text <- "Explosion AI made spaCy for natural language processing 
+         (2+ years-ago). It's a nice library."
+         
+unnest_tokens(lemmatised, word, token, to_lower = TRUE) %>%
+  anti_join(stop_words) %>% `[[`('word')
+#Joining, by = "word"
+# [1] "explosion"  "ai"         "spacy"      "natural"    "language"  
+# [6] "processing" "2"          "ago"        "nice"       "library"  
 
-stopwords
- 
+lemmatised <- spacy_parse(text, pos = FALSE, tag = FALSE, lemma = TRUE,
+              entity = FALSE, dependency = FALSE, nounphrase = FALSE,
+              multithread = TRUE, additional_attributes = 'is_stop')
+lemmatised %>% filter(is_stop != TRUE) %>% `[[`('token')
+# [1] "Explosion"  "AI"         "spaCy"      "natural"    "language"  
+# [6] "processing" "("          "2"          "+"          "years"     
+#[11] "-"          "ago"        ")"          "."          "nice"      
+#[16] "library"    "."         
+``` 
 ---
 # linguistic features 
 
