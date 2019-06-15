@@ -57,7 +57,7 @@ will install miniconda and python and spacy and run them in the background
 # Preprocessing 
 ## Tokenisation
 ```{r}
-text <- "Ines Montani made spaCy for natural language processing 
+text <- "Explosion AI made spaCy for natural language processing 
          (2+ years-ago). It's a nice library."
 tokenised <- spacy_tokenize(text, what = "word", remove_punct = TRUE,
                remove_url = FALSE, remove_numbers = TRUE,
@@ -65,11 +65,11 @@ tokenised <- spacy_tokenize(text, what = "word", remove_punct = TRUE,
                padding = TRUE, multithread = TRUE, output = "list")
 tokenised
 #$text1
-# [1] "Ines"       "Montani"    "made"       "spaCy"      "for"       
+# [1] "Explosion"  "AI"         "made"       "spaCy"      "for"       
 # [6] "natural"    "language"   "processing" ""           ""          
 #[11] "+"          "years"      ""           "ago"        ""          
 #[16] ""           ""           "It"         "'s"         "a"         
-#[21] "nice"       "library"    ""    
+#[21] "nice"       "library"    ""     
 ```
  
 ---
