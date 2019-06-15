@@ -43,9 +43,3 @@ vertical-center : false
 
 remote-control: true
 published : true
-
-#
-# Layout Setting
-# Doc: https://gitpitch.com/docs/settings/layout
-#
-layout : center-right
