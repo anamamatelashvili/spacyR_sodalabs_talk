@@ -35,11 +35,15 @@ will focus on text processing
 ---
 # spaCy
 
+multithreading 
+
+---
+# spacyr 
+
 spacyr
 will install miniconda and python and spacy and run them in the background 
 
 ---
-
 # Key components of spacyr
 
 @ul
@@ -50,7 +54,6 @@ will install miniconda and python and spacy and run them in the background
 @ulend
 
 ---
-
 # preprocessing 
  tokenisation, sentence segmentation, 
  
@@ -64,21 +67,18 @@ lemmatisation
 stopwords
  
 ---
-
 # linguistic features 
 
 pos and tag 
 
 
 ---
-
 # linguistic features 
 
 dep
 
 
 ---
-
 # Entities 
 
 named
@@ -89,7 +89,15 @@ named
 extended
 
 --- 
-# coreNLP
+# word embeddings
+
+--- 
+# Semantic similarity 
+
+--- 
+# Other text processing 
+
+coreNLP
 
 entity linking
 coreference resolution
