@@ -181,23 +181,69 @@ dep %>% filter(sentence_id == 2)
 
 ---
 # Noun phrases 
+```r
+text <- "Explosion-AI made SPACY for natural language processing 
+         (2+ years ago). It's faster than other NLP libraries."
+nounphrases <- spacy_parse(text, pos = FALSE, tag = FALSE, lemma = FALSE,
+                   entity = FALSE, dependency = FALSE, nounphrase = TRUE,
+                   multithread = TRUE)
+nounphrase_extract(nounphrases, concatenator = "_")
+#  doc_id sentence_id                  nounphrase
+#1  text1           1                Explosion-AI
+#2  text1           1                       SPACY
+#3  text1           1 natural_language_processing
+#4  text1           2                          It
+#5  text1           2         other_NLP_libraries
+```
 
 
 ---
 # Named entities
+```r
+text <- "Explosion-AI made SPACY for natural language processing 
+         (2+ years ago). It's faster than other NLP libraries."
+entities <- spacy_parse(text, pos = FALSE, tag = FALSE, lemma = FALSE,
+                           entity = TRUE, dependency = FALSE, nounphrase = FALSE,
+                           multithread = TRUE)
+entity_extract(entities, type = 'all', concatenator = "_")
+#  doc_id sentence_id         entity entity_type
+#1  text1           1 Explosion_-_AI         ORG
+#2  text1           1          SPACY         ORG
+#3  text1           1  2_+_years_ago        DATE
+#4  text1           2            NLP         ORG
+```
+--- 
+# Word embeddings and semantic similarity 
+## [Global Vectors for word representation](https://nlp.stanford.edu/projects/glove/)
+```r
+text <- "apple orange chair rumpelstiltskin"
+vectors <- spacy_parse(text, pos = FALSE, tag = FALSE, lemma = FALSE,
+                       entity = FALSE, dependency = FALSE, nounphrase = FALSE,
+                       multithread = TRUE, 
+                       additional_attributes = c('has_vector', 'vector_norm', 'vector'))
+vectors %>% select(token, has_vector, vector_norm) 
+#            token has_vector vector_norm
+#1           apple       TRUE    7.134685
+#2          orange       TRUE    6.542022
+#3           chair       TRUE    6.875682
+#4 rumpelstiltskin       TRUE    7.412047
+```
+Cosine similarity scores between:
+@ul
+- apple and orange: 0.5618917
+- apple and chair: 0.1714211
+- apple and rumpelstiltskin: -0.1144477
+@ulend
 
-named
+--- 
+# Other attributes  
 
 ---
-# Extended entities
-
-extended
-
---- 
-# word embeddings
-
---- 
-# Semantic similarity 
+@snap[midpoint span-50]
+```r
+spacy_finalize()
+```
+@snapend
 
 --- 
 # Other text processing 
