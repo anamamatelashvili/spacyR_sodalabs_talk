@@ -133,7 +133,7 @@ unnest_tokens(lemmatised, word, token, to_lower = TRUE) %>%
   anti_join(stop_words) %>% `[[`('word')
 #Joining, by = "word"
 # [1] "radch"     "empire"    "created"   "thousands" "ago"      
-# [6] "leader"    "annander"  "mianaai"   "bodied"    "divided"  
+# [6] "leader"    "anaander"  "mianaai"   "bodied"    "divided"  
 #[11] "2"         "factions"
 lemmatised <- spacy_parse(text, pos = FALSE, tag = FALSE, lemma = TRUE,
               entity = FALSE, dependency = FALSE, nounphrase = FALSE,
