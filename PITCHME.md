@@ -250,8 +250,6 @@ Check spaCy doc for [full list of token attributes](https://spacy.io/api/token).
 - etc. 
 @ulend
 
----
-
 ```r
 spacy_finalize()
 ```
