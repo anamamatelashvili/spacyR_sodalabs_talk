@@ -272,6 +272,7 @@ annObj <- annotateString(text)
 ```
 
 ---
+
 # Sentiment 
 
 ```r
@@ -281,7 +282,6 @@ getSentiment(annObj)
 #2  2              2   Neutral
 ```
 
----
 # Coreference resolution
 
 ```r
@@ -306,11 +306,16 @@ getOpenIE(annObj) %>% select(subject, relation, object)
 ```
 
 --- 
-# summarise ???
-maybe have a picture of grakn result???
+# One step further
+
+@snap[west span-100]
+- Pretrain with domain-specific text
+- Add custom entity types 
+- Make domain-specific word embeddings 
+@snapend
 
 ---
-@snap[midpoint span-100]
+@snap[west span-100]
 # Thank you! 
 @snapend
 
