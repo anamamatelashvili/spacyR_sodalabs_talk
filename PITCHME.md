@@ -213,7 +213,7 @@ entity_extract(entities, type = 'all', concatenator = "_")
 #4  text1           2            NLP         ORG
 ```
 --- 
-# Word embeddings and semantic similarity 
+# Word embeddings
 [Global Vectors for word representation](https://nlp.stanford.edu/projects/glove/)
 ```r
 text <- "apple orange chair rumpelstiltskin"
@@ -221,11 +221,14 @@ vectors <- spacy_parse(text, pos = FALSE, tag = FALSE, lemma = FALSE,
                        entity = FALSE, dependency = FALSE, nounphrase = FALSE,
                        multithread = TRUE, 
                        additional_attributes = c('has_vector', 'vector_norm', 'vector'))
-vectors[1:2] %>% select(token, has_vector, vector_norm) 
+vectors[1:2,] %>% select(token, has_vector, vector_norm) 
 #            token has_vector vector_norm
 #1           apple       TRUE    7.134685
 #2          orange       TRUE    6.542022
 ```
+---
+# Semantic similarity 
+
 Cosine similarity scores between:
 @ul
 - apple and orange: 0.5618917
