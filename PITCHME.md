@@ -7,19 +7,21 @@
 @snap[south-east span-30]
 18 June, 2019
 @snapend
+
 ---
 @snap[midpoint span-50]
 # A bit about me 
 @snapend
+
 ---
 
 # Why do NLP?
-@ul
+
 - @fa[robot](Chatbots)
 - speech to text
 - translation
 - summarisation 
-@ulend
+
 
 will focus on text processing 
 
@@ -27,9 +29,9 @@ will focus on text processing
 
 # Challenges of text processing 
 
-@ul
+
 - jhgfjhgf
-@ulend
+
 
  
 ---
@@ -46,12 +48,12 @@ will install miniconda and python and spacy and run them in the background
 ---
 # Key components of spacyr
 
-@ul
+
 - preprocessing
 - linguistic features 
 - language models
 - word embeddings 
-@ulend
+
 
 ---
 # Preprocessing 
@@ -230,11 +232,11 @@ vectors[1:2,] %>% select(token, has_vector, vector_norm)
 # Semantic similarity 
 
 Cosine similarity scores between:
-@ul
+
 - apple and orange: 0.5618917
 - apple and chair: 0.1714211
 - apple and rumpelstiltskin: -0.1144477
-@ulend
+
 
 --- 
 @transition[none]
@@ -310,7 +312,9 @@ getOpenIE(annObj) %>% select(subject, relation, object)
 
 @snap[west span-100]
 - Pretrain with domain-specific text
+
 - Add custom entity types 
+
 - Make domain-specific word embeddings 
 @snapend
 
