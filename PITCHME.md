@@ -175,7 +175,10 @@ dep %>% filter(sentence_id == 2)
 ```
 
 ---
+@snap[midpoint span-100]
 ![](dep.png)
+@snapend
+
 ---
 # Noun phrases 
 
