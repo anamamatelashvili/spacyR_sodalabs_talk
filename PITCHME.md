@@ -128,15 +128,13 @@ lemmatised %>% filter(token != lemma)
 ```r
 text <- "The Radch Empire was created thousands of years ago. 
          Its leader is Anaander Mianaai. 
-         She's many-bodied and divided in at least 2 factions."
-         
+         She's many-bodied and divided in at least 2 factions."        
 unnest_tokens(lemmatised, word, token, to_lower = TRUE) %>%
   anti_join(stop_words) %>% `[[`('word')
 #Joining, by = "word"
 # [1] "radch"     "empire"    "created"   "thousands" "ago"      
 # [6] "leader"    "annander"  "mianaai"   "bodied"    "divided"  
 #[11] "2"         "factions"
-
 lemmatised <- spacy_parse(text, pos = FALSE, tag = FALSE, lemma = TRUE,
               entity = FALSE, dependency = FALSE, nounphrase = FALSE,
               multithread = TRUE, additional_attributes = 'is_stop')
