@@ -237,6 +237,7 @@ Cosine similarity scores between:
 @ulend
 
 --- 
+@transition[none]
 # Additional attributes  
 
 Check spaCy doc for [full list of token attributes](https://spacy.io/api/token). 
@@ -252,12 +253,11 @@ Check spaCy doc for [full list of token attributes](https://spacy.io/api/token).
 
 ---
 
-@snap[west span-100]
 
 ```r
 spacy_finalize()
 ```
-@snapend
+
 
 --- 
 # Other text processing 
