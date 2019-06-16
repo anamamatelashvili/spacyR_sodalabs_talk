@@ -57,81 +57,83 @@ will install miniconda and python and spacy and run them in the background
 # Preprocessing 
 ## Tokenisation
 ```r
-text <- "Explosion AI made spaCy for natural language processing 
-         (2+ years-ago). It's a nice library."
+text <- "Explosion-AI made spaCy for natural language processing 
+         (2+ years ago). It's faster than other NLP libraries."
 tokenised <- spacy_tokenize(text, what = "word", remove_punct = TRUE,
                remove_url = FALSE, remove_numbers = TRUE,
                remove_separators = TRUE, remove_symbols = FALSE, 
                padding = TRUE, multithread = TRUE, output = "list")
 tokenised
 #$text1
-# [1] "Explosion"  "AI"         "made"       "spaCy"      "for"       
-# [6] "natural"    "language"   "processing" ""           ""          
-#[11] "+"          "years"      ""           "ago"        ""          
-#[16] ""           "It"         "'s"         "a"          "nice"      
-#[21] "library"    ""  
+# [1] "Explosion"  ""           "AI"         "made"       "spaCy"     
+# [6] "for"        "natural"    "language"   "processing" ""          
+#[11] ""           "+"          "years"      "ago"        ""          
+#[16] ""           "It"         "'s"         "faster"     "than"      
+#[21] "other"      "NLP"        "libraries"  ""        
 ```
  
 ---
 # Preprocessing 
 ## Lemmatisation
 ```r
-text <- "Explosion AI made spaCy for natural language processing 
-         (2+ years-ago). It's a nice library."
+text <- "Explosion-AI made spaCy for natural language processing 
+        (2+ years ago). It's faster than other NLP libraries."
 lemmatised <- spacy_parse(text, pos = FALSE, tag = FALSE, lemma = TRUE,
             entity = FALSE, dependency = FALSE, nounphrase = FALSE,
             multithread = TRUE)
 lemmatised %>% filter(token != lemma)
 #  doc_id sentence_id token_id     token     lemma
 #1  text1           1        1 Explosion explosion
-#2  text1           1        3      made      make
-#3  text1           1        4     spaCy     spacy
-#4  text1           1       12     years      year
+#2  text1           1        4      made      make
+#3  text1           1        5     spaCy     spacy
+#4  text1           1       13     years      year
 #5  text1           2        1        It    -PRON-
 #6  text1           2        2        's        be
+#7  text1           2        3    faster      fast
+#8  text1           2        7 libraries   library
 ```
 
 ---
 # Preprocessing
 ## Stopwords
 ```r
-text <- "Explosion AI made spaCy for natural language processing 
-         (2+ years-ago). It's a nice library."
+text <- "Explosion-AI made spaCy for natural language processing 
+        (2+ years ago). It's faster than other NLP libraries."
          
 unnest_tokens(lemmatised, word, token, to_lower = TRUE) %>%
   anti_join(stop_words) %>% `[[`('word')
 #Joining, by = "word"
 # [1] "explosion"  "ai"         "spacy"      "natural"    "language"  
-# [6] "processing" "2"          "ago"        "nice"       "library"  
+# [6] "processing" "2"          "ago"        "faster"     "nlp"       
+#[11] "libraries"
 
 lemmatised <- spacy_parse(text, pos = FALSE, tag = FALSE, lemma = TRUE,
               entity = FALSE, dependency = FALSE, nounphrase = FALSE,
               multithread = TRUE, additional_attributes = 'is_stop')
 lemmatised %>% filter(is_stop != TRUE) %>% `[[`('token')
-# [1] "Explosion"  "AI"         "spaCy"      "natural"    "language"  
-# [6] "processing" "("          "2"          "+"          "years"     
-#[11] "-"          "ago"        ")"          "."          "nice"      
-#[16] "library"    "."         
+# [1] "Explosion"  "-"          "AI"         "spaCy"      "natural"   
+# [6] "language"   "processing" "("          "2"          "+"         
+#[11] "years"      "ago"        ")"          "."          "faster"    
+#[16] "NLP"        "libraries"  "."                    
 ``` 
 ---
-# linguistic features 
+# Linguistic features: parts of speech 
 
-pos and tag 
 
 
 ---
-# linguistic features 
+# Linguistic features: dependencies
 
 dep
 
 
 ---
-# Entities 
+# Entities: named
 
 named
 
 ---
-# Entities
+# Entities: extended 
 
 extended
 
