@@ -64,97 +64,108 @@
 ## Tokenisation
 ```r
 text <- "The Radch Empire was created thousands of years ago. 
-         It's leader is Annander Mianaai. 
-         She is many-bodied and divided in at least 2 factions."
+         Its leader is Annander Mianaai. 
+         She's many-bodied and divided in at least 2 conflicting factions."
 tokenised <- spacy_tokenize(text, what = "word", remove_punct = TRUE,
               remove_url = FALSE, remove_numbers = TRUE,
-              remove_separators = TRUE, remove_symbols = FALSE, padding = TRUE,
-              multithread = TRUE, output = "list")
+              remove_separators = TRUE, remove_symbols = FALSE, 
+              padding = TRUE, multithread = TRUE, output = "list")
 tokenised
 $text1
- [1] "The"       "Radch"     "Empire"    "was"       "created"   "thousands"
- [7] "of"        "years"     "ago"       ""          "It"        "'s"       
-[13] "leader"    "is"        "Annander"  "Mianaai"   ""          "She"      
-[19] "is"        "many"      ""          "bodied"    "and"       "divided"  
-[25] "in"        "at"        "least"     ""          "factions"  ""       
+ [1] "The"       "Radch"     "Empire"    "was"       "created"  
+ [6] "thousands" "of"        "years"     "ago"       ""         
+[11] "Its"       "leader"    "is"        "Annander"  "Mianaai"  
+[16] ""          "She"       "'s"        "many"      ""         
+[21] "bodied"    "and"       "divided"   "in"        "at"       
+[26] "least"     ""          "factions"  ""     
 ```
  
 ---
 # Preprocessing 
 ## Sentence segmentation 
 ```r
-text <- "Explosion-AI made spaCy for natural language processing 
-         (2+ years ago) It's faster than other NLP libraries."
+text <- "The Radch Empire was created thousands of years ago. 
+         Its leader is Annander Mianaai 
+         She's many-bodied and divided in at least 2 factions."
 sentences <- spacy_tokenize(text, what = "sentence", remove_punct = TRUE,
                remove_url = FALSE, remove_numbers = TRUE,
                remove_separators = TRUE, remove_symbols = FALSE, 
                padding = TRUE, multithread = TRUE, output = "list")
 sentences
-#$text1
-#[1] "Explosion-AI made spaCy for natural language processing (2+ years ago)"
-#[2] "It's faster than other NLP libraries."    
+$text1
+[1] "The Radch Empire was created thousands of years ago." 
+[2] "Its leader is Annander Mianaai"                       
+[3] "She's many-bodied and divided in at least 2 factions."  
 ``` 
 ---
 # Preprocessing 
 ## Lemmatisation
 ```r
-text <- "Explosion-AI made spaCy for natural language processing 
-        (2+ years ago). It's faster than other NLP libraries."
+text <- "The Radch Empire was created thousands of years ago. 
+         Its leader is Annander Mianaai. 
+         She's many-bodied and divided in at least 2 factions."
 lemmatised <- spacy_parse(text, pos = FALSE, tag = FALSE, lemma = TRUE,
             entity = FALSE, dependency = FALSE, nounphrase = FALSE,
             multithread = TRUE)
 lemmatised %>% filter(token != lemma)
-#  doc_id sentence_id token_id     token     lemma
-#1  text1           1        1 Explosion explosion
-#2  text1           1        4      made      make
-#3  text1           1        5     spaCy     spacy
-#4  text1           1       13     years      year
-#5  text1           2        1        It    -PRON-
-#6  text1           2        2        's        be
-#7  text1           2        3    faster      fast
-#8  text1           2        7 libraries   library
+   doc_id sentence_id token_id     token    lemma
+1   text1           1        1       The      the
+2   text1           1        4       was       be
+3   text1           1        5   created   create
+4   text1           1        6 thousands thousand
+5   text1           1        8     years     year
+6   text1           2        1       Its   -PRON-
+7   text1           2        3        is       be
+8   text1           3        1       She   -PRON-
+9   text1           3        2        's       be
+10  text1           3        7   divided   divide
+11  text1           3       12  factions  faction
 ```
 
 ---
 # Preprocessing
 ## Stopwords
 ```r
-text <- "Explosion-AI made spaCy for natural language processing 
-        (2+ years ago). It's faster than other NLP libraries."
+text <- "The Radch Empire was created thousands of years ago. 
+         Its leader is Annander Mianaai. 
+         She's many-bodied and divided in at least 2 factions."
          
 unnest_tokens(lemmatised, word, token, to_lower = TRUE) %>%
   anti_join(stop_words) %>% `[[`('word')
-#Joining, by = "word"
-# [1] "explosion"  "ai"         "spacy"      "natural"    "language"  
-# [6] "processing" "2"          "ago"        "faster"     "nlp"       
-#[11] "libraries"
+Joining, by = "word"
+ [1] "radch"     "empire"    "created"   "thousands" "ago"      
+ [6] "leader"    "annander"  "mianaai"   "bodied"    "divided"  
+[11] "2"         "factions"
 
 lemmatised <- spacy_parse(text, pos = FALSE, tag = FALSE, lemma = TRUE,
               entity = FALSE, dependency = FALSE, nounphrase = FALSE,
               multithread = TRUE, additional_attributes = 'is_stop')
 lemmatised %>% filter(is_stop != TRUE) %>% `[[`('token')
-# [1] "Explosion"  "-"          "AI"         "spaCy"      "natural"   
-# [6] "language"   "processing" "("          "2"          "+"         
-#[11] "years"      "ago"        ")"          "."          "faster"    
-#[16] "NLP"        "libraries"  "."                    
+ [1] "Radch"     "Empire"    "created"   "thousands" "years"    
+ [6] "ago"       "."         "leader"    "Annander"  "Mianaai"  
+[11] "."         "-"         "bodied"    "divided"   "2"        
+[16] "factions"  "."                     
 ``` 
 ---
 # Linguistic features
 ## Parts of speech 
 ```r
-text <- "Explosion-AI made spaCy for natural language processing 
-        (2+ years ago). It's faster than other NLP libraries."
+text <- "The Radch Empire was created thousands of years ago. 
+         Its leader is Annander Mianaai. 
+         She's many-bodied and divided in at least 2 factions."
 pos <- spacy_parse(text, pos = TRUE, tag = TRUE, lemma = FALSE,
                    entity = FALSE, dependency = FALSE, nounphrase = FALSE,
                    multithread = TRUE)
 pos %>% filter(pos == 'ADJ' | pos == 'VERB')
-#  doc_id sentence_id token_id   token  pos tag
-#1  text1           1        4    made VERB VBD
-#2  text1           1        5   spaCy  ADJ  JJ
-#3  text1           1        7 natural  ADJ  JJ
-#4  text1           2        2      's VERB VBZ
-#5  text1           2        3  faster  ADJ JJR
-#6  text1           2        5   other  ADJ  JJ
+  doc_id sentence_id token_id   token  pos tag
+1  text1           1        4     was VERB VBD
+2  text1           1        5 created VERB VBN
+3  text1           2        3      is VERB VBZ
+4  text1           3        2      's VERB VBZ
+5  text1           3        3    many  ADJ  JJ
+6  text1           3        5  bodied  ADJ  JJ
+7  text1           3        7 divided VERB VBN
+8  text1           3       10   least  ADJ JJS
 ```
 
 See [annotation specifications](https://spacy.io/api/annotation) for the full tag list. 
@@ -164,21 +175,20 @@ See [annotation specifications](https://spacy.io/api/annotation) for the full ta
 ## Dependencies
 
 ```r
-text <- "Explosion-AI made spaCy for natural language processing 
-        (2+ years ago). It's faster than other NLP libraries."
+text <- "The Radch Empire was created thousands of years ago. 
+         Its leader is Annander Mianaai. 
+         She's many-bodied and divided in at least 2 factions."
 dep <- spacy_parse(text, pos = FALSE, tag = FALSE, lemma = FALSE,
                    entity = FALSE, dependency = TRUE, nounphrase = FALSE,
                    multithread = TRUE)
 dep %>% filter(sentence_id == 2)
-#  doc_id sentence_id token_id     token head_token_id  dep_rel
-#1  text1           2        1        It             2    nsubj
-#2  text1           2        2        's             2     ROOT
-#3  text1           2        3    faster             2    acomp
-#4  text1           2        4      than             3     prep
-#5  text1           2        5     other             7     amod
-#6  text1           2        6       NLP             7 compound
-#7  text1           2        7 libraries             4     pobj
-#8  text1           2        8         .             2    punct
+  doc_id sentence_id token_id    token head_token_id  dep_rel
+1  text1           2        1      Its             2     poss
+2  text1           2        2   leader             3    nsubj
+3  text1           2        3       is             3     ROOT
+4  text1           2        4 Annander             5 compound
+5  text1           2        5  Mianaai             3     attr
+6  text1           2        6        .             3    punct
 ```
 
 ---
@@ -189,35 +199,38 @@ dep %>% filter(sentence_id == 2)
 ---
 # Noun phrases 
 ```r
-text <- "Explosion-AI made SPACY for natural language processing 
-         (2+ years ago). It's faster than other NLP libraries."
+text <- "The Radch Empire was created thousands of years ago. 
+         Its leader is Annander Mianaai. 
+         She's many-bodied and divided in at least 2 factions."
 nounphrases <- spacy_parse(text, pos = FALSE, tag = FALSE, lemma = FALSE,
                    entity = FALSE, dependency = FALSE, nounphrase = TRUE,
                    multithread = TRUE)
 nounphrase_extract(nounphrases, concatenator = "_")
-#  doc_id sentence_id                  nounphrase
-#1  text1           1                Explosion-AI
-#2  text1           1                       SPACY
-#3  text1           1 natural_language_processing
-#4  text1           2                          It
-#5  text1           2         other_NLP_libraries
+  doc_id sentence_id          nounphrase
+1  text1           1    The_Radch_Empire
+2  text1           1               years
+3  text1           2          Its_leader
+4  text1           2    Annander_Mianaai
+5  text1           3                 She
+6  text1           3 at_least_2_factions
 ```
 
 
 ---
-# Named entities
+# Entities
 ```r
-text <- "Explosion-AI made SPACY for natural language processing 
-         (2+ years ago). It's faster than other NLP libraries."
+text <- "The Radch Empire was created thousands of years ago. 
+         Its leader is Annander Mianaai. 
+         She's many-bodied and divided in at least 2 factions."
 entities <- spacy_parse(text, pos = FALSE, tag = FALSE, lemma = FALSE,
                            entity = TRUE, dependency = FALSE, nounphrase = FALSE,
                            multithread = TRUE)
 entity_extract(entities, type = 'all', concatenator = "_")
-#  doc_id sentence_id         entity entity_type
-#1  text1           1 Explosion_-_AI         ORG
-#2  text1           1          SPACY         ORG
-#3  text1           1  2_+_years_ago        DATE
-#4  text1           2            NLP         ORG
+  doc_id sentence_id                 entity entity_type
+1  text1           1       The_Radch_Empire         GPE
+2  text1           1 thousands_of_years_ago        DATE
+3  text1           2       Annander_Mianaai      PERSON
+4  text1           3             at_least_2    CARDINAL
 ```
 --- 
 # Word embeddings
@@ -266,7 +279,6 @@ spacy_finalize()
 
 - Sentiment scores 
 - Coreference resolution
-- Entity linking 
 - Open information extraction 
 
 ## Stanford [coreNLP](https://stanfordnlp.github.io/CoreNLP/)
@@ -277,19 +289,36 @@ spacy_finalize()
 ```r
 downloadCoreNLP()
 initCoreNLP(type='english_all')
-text <- "Explosion-AI made SPACY for natural language processing 
-         (2+ years ago). It's faster than other NLP libraries."
+text <- "The Radch Empire was created thousands of years ago. 
+         Its leader is Annander Mianaai. 
+         She's many-bodied and divided in at least 2 factions."
 annObj <- annotateString(text)
 getOpenIE(annObj) %>% select(subject, relation, object)
-#       subject       relation                                object
-#1 Explosion-AI           made                                 SPACY
-#2 Explosion-AI           made         SPACY for language processing
-#3 Explosion-AI           made SPACY for natural language processing
-#4           It 's faster than                   other NLP libraries
-#5           It 's faster than                         NLP libraries
-#6           It            has                                faster
+       subject    relation                 object
+1 Radch Empire was created     thousands of years
+2 Radch Empire was created thousands of years ago
+3 Radch Empire was created              thousands
+4   Its leader          is       Annander Mianaai
+5          She  divided in    at least 2 factions
+6          She         has            many-bodied
 ```
+---
+# Coreferences and sentiment 
+```r
+getCoreference(annObj)
+  corefId sentence start end head startIndex endIndex
+1       1        1     1   4    3          1        3
+2       1        2     1   2    1         11       11
+3       2        2     4   6    5         14       15
+4       2        2     1   3    2         11       12
+5       2        3     1   2    1         17       17
 
+getSentiment(annObj)
+  id sentimentValue sentiment
+1  1              2   Neutral
+2  2              1  Negative
+3  3              2   Neutral
+```
 --- 
 # One step further
 
