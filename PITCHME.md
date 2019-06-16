@@ -242,16 +242,11 @@ Cosine similarity scores between:
 
 Check spaCy doc for [full list of token attributes](https://spacy.io/api/token). 
 
-@ul
 - lower_, is_lower,
 - shape_,
 - is_alpha, is_digit, is_ascii, like_num, is_currency, 
 - is_oov,
-- is_space, is_bracket, is_quote,
-- etc. 
-@ulend
-
----
+- is_space, is_bracket, is_quote, etc.
 
 
 ```r
@@ -260,28 +255,62 @@ spacy_finalize()
 
 
 --- 
-# Other text processing 
+# Other text processing tasks
 
-coreNLP
+- Sentiment scores 
+- Coreference resolution
+- Open information extraction 
 
-entity linking
-coreference resolution
-open information extraction
+## Stanford [coreNLP](https://stanfordnlp.github.io/CoreNLP/)
+
+```r
+downloadCoreNLP()
+initCoreNLP(type='english_all')
+text <- "Explosion-AI made SPACY for natural language processing 
+         (2+ years ago). It's faster than other NLP libraries."
+annObj <- annotateString(text)
+```
 
 ---
-# entity linking
+# Sentiment 
+
+```r
+getSentiment(annObj)
+#  id sentimentValue sentiment
+#1  1              1  Negative
+#2  2              2   Neutral
+```
 
 ---
-# coreference resolution
+# Coreference resolution
+
+```r
+getCoreference(annObj)
+#  corefId sentence start end head startIndex endIndex
+#1       1        1     3  14    3          3       13
+#2       1        2     1   2    1         15       15
+```
 
 ---
-# open information extraction
+# Open information extraction
+
+```r
+getOpenIE(annObj) %>% select(subject, relation, object)
+#       subject       relation                                object
+#1 Explosion-AI           made                                 SPACY
+#2 Explosion-AI           made         SPACY for language processing
+#3 Explosion-AI           made SPACY for natural language processing
+#4           It 's faster than                   other NLP libraries
+#5           It 's faster than                         NLP libraries
+#6           It            has                                faster
+```
 
 --- 
-# summarise 
+# summarise ???
 maybe have a picture of grakn result???
 
 ---
-
+@snap[midpoint span-100]
 # Thank you! 
-There are many natural language processing libraries out there and each has it's own advantages. One of Ana's favourites is spaCy because of it's speed and user-friendliness. In this talk she will discuss how to leverage spaCy's powerful features with the spacyr package and combine them with other packages such as tidytext, quanteda and coreNLP to do natural language processing in R. She will discuss use cases for tokenisation, lemmatisation, extraction of linguistic features and named entities as well as Coreference Resolution.
+@snapend
+
