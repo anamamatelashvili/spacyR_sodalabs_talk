@@ -74,6 +74,21 @@ tokenised
  
 ---
 # Preprocessing 
+## Sentence segmentation 
+```r
+text <- "Explosion-AI made spaCy for natural language processing 
+         (2+ years ago) It's faster than other NLP libraries."
+sentences <- spacy_tokenize(text, what = "sentence", remove_punct = TRUE,
+               remove_url = FALSE, remove_numbers = TRUE,
+               remove_separators = TRUE, remove_symbols = FALSE, 
+               padding = TRUE, multithread = TRUE, output = "list")
+sentences
+#$text1
+#[1] "Explosion-AI made spaCy for natural language processing (2+ years ago)"
+#[2] "It's faster than other NLP libraries."    
+``` 
+---
+# Preprocessing 
 ## Lemmatisation
 ```r
 text <- "Explosion-AI made spaCy for natural language processing 
@@ -117,23 +132,59 @@ lemmatised %>% filter(is_stop != TRUE) %>% `[[`('token')
 #[16] "NLP"        "libraries"  "."                    
 ``` 
 ---
-# Linguistic features: parts of speech 
+# Linguistic features
+## Parts of speech 
+```r
+text <- "Explosion-AI made spaCy for natural language processing 
+        (2+ years ago). It's faster than other NLP libraries."
+pos <- spacy_parse(text, pos = TRUE, tag = TRUE, lemma = FALSE,
+                   entity = FALSE, dependency = FALSE, nounphrase = FALSE,
+                   multithread = TRUE)
+pos %>% filter(pos == 'ADJ' | pos == 'VERB')
+#  doc_id sentence_id token_id   token  pos tag
+#1  text1           1        4    made VERB VBD
+#2  text1           1        5   spaCy  ADJ  JJ
+#3  text1           1        7 natural  ADJ  JJ
+#4  text1           2        2      's VERB VBZ
+#5  text1           2        3  faster  ADJ JJR
+#6  text1           2        5   other  ADJ  JJ
+```
 
+See (annotation specifications)[https://spacy.io/api/annotation] for the full tag list. 
+
+---
+# Linguistic features
+## Dependencies
+
+```r
+text <- "Explosion-AI made spaCy for natural language processing 
+        (2+ years ago). It's faster than other NLP libraries."
+dep <- spacy_parse(text, pos = FALSE, tag = FALSE, lemma = FALSE,
+                   entity = FALSE, dependency = TRUE, nounphrase = FALSE,
+                   multithread = TRUE)
+dep %>% filter(sentence_id == 2)
+#  doc_id sentence_id token_id     token head_token_id  dep_rel
+#1  text1           2        1        It             2    nsubj
+#2  text1           2        2        's             2     ROOT
+#3  text1           2        3    faster             2    acomp
+#4  text1           2        4      than             3     prep
+#5  text1           2        5     other             7     amod
+#6  text1           2        6       NLP             7 compound
+#7  text1           2        7 libraries             4     pobj
+#8  text1           2        8         .             2    punct
+```
+
+---
+# Noun phrases 
 
 
 ---
-# Linguistic features: dependencies
-
-dep
-
-
----
-# Entities: named
+# Named entities
 
 named
 
 ---
-# Entities: extended 
+# Extended entities
 
 extended
 
