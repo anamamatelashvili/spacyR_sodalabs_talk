@@ -18,41 +18,45 @@
 # Why do NLP?
 
 - @fa[robot](Chatbots)
-- speech to text
-- translation
-- summarisation 
+- Knowledge graphs 
+- Machine translation
+- Automatic summarisation 
+- Speech-to-text
+- OCR  
 
 
-will focus on text processing 
+### We will focus on text processing 
 
 ---
 
 # Challenges of text processing 
 
-
-- jhgfjhgf
-
-
+- Large vocabulary
+- Vast amounts of data
+- Inconsistencies 
  
 ---
 # spaCy
 
-multithreading 
+- Fast: Cython
+- Wide variety of features 
+- Several pretrained Enlish models
+- Good docs
 
 ---
 # spacyr 
 
-spacyr
-will install miniconda and python and spacy and run them in the background 
+- Runs spacy in the background
+- Will install miniconda, python and spacy 
 
 ---
 # Key components of spacyr
 
 
-- preprocessing
-- linguistic features 
-- language models
-- word embeddings 
+- Preprocessing
+- Linguistic features 
+- Language models
+- Word embeddings 
 
 
 ---
@@ -261,9 +265,13 @@ spacy_finalize()
 
 - Sentiment scores 
 - Coreference resolution
+- Entity linking 
 - Open information extraction 
 
 ## Stanford [coreNLP](https://stanfordnlp.github.io/CoreNLP/)
+
+---
+# Open information extraction
 
 ```r
 downloadCoreNLP()
@@ -271,32 +279,6 @@ initCoreNLP(type='english_all')
 text <- "Explosion-AI made SPACY for natural language processing 
          (2+ years ago). It's faster than other NLP libraries."
 annObj <- annotateString(text)
-```
-
----
-
-# Sentiment 
-
-```r
-getSentiment(annObj)
-#  id sentimentValue sentiment
-#1  1              1  Negative
-#2  2              2   Neutral
-```
-
-# Coreference resolution
-
-```r
-getCoreference(annObj)
-#  corefId sentence start end head startIndex endIndex
-#1       1        1     3  14    3          3       13
-#2       1        2     1   2    1         15       15
-```
-
----
-# Open information extraction
-
-```r
 getOpenIE(annObj) %>% select(subject, relation, object)
 #       subject       relation                                object
 #1 Explosion-AI           made                                 SPACY
@@ -310,13 +292,11 @@ getOpenIE(annObj) %>% select(subject, relation, object)
 --- 
 # One step further
 
-@snap[west span-100]
+
 - Pretrain with domain-specific text
-
 - Add custom entity types 
-
 - Make domain-specific word embeddings 
-@snapend
+
 
 ---
 @snap[west span-100]
