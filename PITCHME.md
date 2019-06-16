@@ -237,14 +237,24 @@ Cosine similarity scores between:
 @ulend
 
 --- 
-# Other attributes  
+# Additional attributes  
 
----
-@snap[midpoint span-50]
+Check spaCy doc for [full list of token attributes](https://spacy.io/api/token). 
+
+@ul
+- lower_, is_lower
+- shape_
+- is_alpha, is_digit, is_ascii, like_num, is_currency 
+- is_oov
+- is_space, is_bracket, is_quote
+- etc. 
+@ulend
+
+
 ```r
 spacy_finalize()
 ```
-@snapend
+
 
 --- 
 # Other text processing 
