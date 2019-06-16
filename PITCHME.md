@@ -63,19 +63,20 @@
 # Preprocessing 
 ## Tokenisation
 ```r
-text <- "Explosion-AI made spaCy for natural language processing 
-         (2+ years ago). It's faster than other NLP libraries."
+text <- "The Radch Empire was created thousands of years ago. 
+         It's leader is Annander Mianaai. 
+         She is many-bodied and divided in at least 2 factions."
 tokenised <- spacy_tokenize(text, what = "word", remove_punct = TRUE,
-               remove_url = FALSE, remove_numbers = TRUE,
-               remove_separators = TRUE, remove_symbols = FALSE, 
-               padding = TRUE, multithread = TRUE, output = "list")
+              remove_url = FALSE, remove_numbers = TRUE,
+              remove_separators = TRUE, remove_symbols = FALSE, padding = TRUE,
+              multithread = TRUE, output = "list")
 tokenised
-#$text1
-# [1] "Explosion"  ""           "AI"         "made"       "spaCy"     
-# [6] "for"        "natural"    "language"   "processing" ""          
-#[11] ""           "+"          "years"      "ago"        ""          
-#[16] ""           "It"         "'s"         "faster"     "than"      
-#[21] "other"      "NLP"        "libraries"  ""        
+$text1
+ [1] "The"       "Radch"     "Empire"    "was"       "created"   "thousands"
+ [7] "of"        "years"     "ago"       ""          "It"        "'s"       
+[13] "leader"    "is"        "Annander"  "Mianaai"   ""          "She"      
+[19] "is"        "many"      ""          "bodied"    "and"       "divided"  
+[25] "in"        "at"        "least"     ""          "factions"  ""       
 ```
  
 ---
