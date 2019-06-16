@@ -150,7 +150,7 @@ pos %>% filter(pos == 'ADJ' | pos == 'VERB')
 #6  text1           2        5   other  ADJ  JJ
 ```
 
-See (annotation specifications)[https://spacy.io/api/annotation] for the full tag list. 
+See [annotation specifications](https://spacy.io/api/annotation) for the full tag list. 
 
 ---
 # Linguistic features
@@ -174,6 +174,8 @@ dep %>% filter(sentence_id == 2)
 #8  text1           2        8         .             2    punct
 ```
 
+---
+![](dep.png)
 ---
 # Noun phrases 
 
