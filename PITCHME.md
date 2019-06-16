@@ -49,6 +49,19 @@
 - Runs spacy in the background
 - Will install miniconda, python and spacy 
 
+```r
+spacy_install(conda = "auto", version = "latest", 
+              lang_models = "en_core_web_lg",
+              python_version = "3.6", envname = "spacy_condaenv",
+              python_path = NULL, prompt = TRUE)
+spacy_download_langmodel(model = "en", envname = "spacy_condaenv",
+                         conda = "auto")
+spacy_initialize(model = "en_core_web_lg", python_executable = NULL,
+                 virtualenv = NULL, condaenv = NULL, ask = FALSE,
+                 refresh_settings = FALSE, save_profile = FALSE, 
+                 check_env = TRUE, entity = TRUE)
+```
+
 ---
 # Key components of spacyr
 
