@@ -17,6 +17,9 @@
 
 # Why do NLP?
 
+<br>
+<br>
+
 - @fa[robot](Chatbots)
 - Knowledge graphs 
 - Machine translation
@@ -31,10 +34,10 @@
 
 # Challenges of text processing 
 
-- Ambiguity of natural language
-- Variability of natural language 
-- Evolution of language 
-- Structure of language: it is discrete, compositional and sparse 
+- Ambiguity 
+- Variability 
+- Evolution  
+- Structural complexity: language is discrete, compositional and sparse 
 - Large vocabulary, vast amounts of data
 - Quality of data: errors and inconsistencies 
  
