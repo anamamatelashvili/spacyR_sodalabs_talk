@@ -31,9 +31,12 @@
 
 # Challenges of text processing 
 
-- Large vocabulary
-- Vast amounts of data
-- Inconsistencies 
+- Ambiguity of natural language
+- Variability of natural language 
+- Evolution of language 
+- Structure of language: it is discrete, compositional and sparse 
+- Large vocabulary, vast amounts of data
+- Quality of data: errors and inconsistencies 
  
 ---
 # spaCy
