@@ -138,9 +138,6 @@ sentences
 # Preprocessing 
 ## Lemmatisation
 ```r
-text <- "The Radch Empire was created thousands of years ago. 
-         Its leader is Anaander Mianaai. 
-         She's many-bodied and divided in at least 2 factions."
 lemmatised <- spacy_parse(text, pos = FALSE, tag = FALSE, lemma = TRUE,
             entity = FALSE, dependency = FALSE, nounphrase = FALSE,
             multithread = TRUE)
