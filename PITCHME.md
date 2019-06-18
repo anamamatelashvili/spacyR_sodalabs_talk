@@ -18,21 +18,27 @@
 # Why do NLP?
 
 <br>
-<br>
 
-- @fa[robot](Chatbots)
-- Knowledge graphs 
+- Information extraction
+  - Entities
+  - Relations
+  - Question answering 
 - Machine translation
-- Automatic summarisation 
-- Speech-to-text
+- Text generation 
+  - Summarisation
+  - Dialogue systems @fa[robot]
+- Speech recognition 
 - OCR  
 
+<br>
 
-### We will focus on text processing 
+We will focus on text processing 
 
 ---
 
 # Challenges of text processing 
+
+<br>
 
 - Ambiguity 
 - Variability 
