@@ -275,9 +275,9 @@ entity_extract(entities, type = 'all', concatenator = "_")
 ```r
 text <- "apple orange chair rumpelstiltskin"
 vectors <- spacy_parse(text, pos = FALSE, tag = FALSE, lemma = FALSE,
-                       entity = FALSE, dependency = FALSE, nounphrase = FALSE,
-                       multithread = TRUE, 
-                       additional_attributes = c('has_vector', 'vector_norm', 'vector'))
+             entity = FALSE, dependency = FALSE, nounphrase = FALSE,
+             multithread = TRUE, 
+             additional_attributes = c('has_vector', 'vector_norm', 'vector'))
 vectors[1:2,] %>% select(token, has_vector, vector_norm) 
 #            token has_vector vector_norm
 #1           apple       TRUE    7.134685
