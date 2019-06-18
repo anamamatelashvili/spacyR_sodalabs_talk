@@ -67,8 +67,8 @@ We will focus on text processing
 
 <br>
 
-- Runs spacy in the background
-- Will install miniconda, python and spacy 
+- Will install Miniconda, Python and spaCy 
+- Will run spaCy in the background
 
 <br>
 
@@ -77,8 +77,8 @@ spacy_install(conda = "auto", version = "latest",
               lang_models = "en_core_web_lg",
               python_version = "3.6", envname = "spacy_condaenv",
               python_path = NULL, prompt = TRUE)
-spacy_download_langmodel(model = "en", envname = "spacy_condaenv",
-                         conda = "auto")
+#spacy_download_langmodel(model = "en", envname = "spacy_condaenv",
+#                         conda = "auto")
 spacy_initialize(model = "en_core_web_lg", python_executable = NULL,
                  virtualenv = NULL, condaenv = NULL, ask = FALSE,
                  refresh_settings = FALSE, save_profile = FALSE, 
@@ -311,7 +311,7 @@ Cosine similarity scores between:
 - is_space, is_bracket, is_quote, etc.
 
 
-Check spaCy doc for [full list of token attributes](https://spacy.io/api/token). 
+Check spaCy docs for [the full list of token attributes](https://spacy.io/api/token). 
 
 <br>
 
