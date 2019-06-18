@@ -175,7 +175,7 @@ unnest_tokens(lemmatised, word, token, to_lower = TRUE) %>%
 lemmatised <- spacy_parse(text, pos = FALSE, tag = FALSE, lemma = TRUE,
               entity = FALSE, dependency = FALSE, nounphrase = FALSE,
               multithread = TRUE, additional_attributes = 'is_stop')
-lemmatised %>% filter(is_stop != TRUE) %>% `[[`('token')
+lemmatised %>% filter(is_stop == FALSE) %>% `[[`('token')
 # [1] "Radch"     "Empire"    "created"   "thousands" "years"    
 # [6] "ago"       "."         "leader"    "Anaander"  "Mianaai"  
 #[11] "."         "-"         "bodied"    "divided"   "2"        
