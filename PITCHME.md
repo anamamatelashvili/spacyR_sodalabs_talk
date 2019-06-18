@@ -26,7 +26,7 @@
 - Ambiguity 
 - Variability 
 - Evolution  
-- Structural complexity: language is discrete, compositional and sparse 
+- Structural complexity: language is discrete, compositional and sparse
 - Large vocabulary, vast amounts of data
 - Quality of data: errors and inconsistencies 
 
