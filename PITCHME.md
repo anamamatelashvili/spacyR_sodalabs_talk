@@ -64,6 +64,7 @@ We will focus on text processing
 
 ---
 # spacyr 
+By Kenneth Benoit, Akitaka Matsuo
 
 <br>
 
