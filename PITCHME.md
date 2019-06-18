@@ -8,10 +8,27 @@
 18 June, 2019
 @snapend
 
+@snap[south-west span-40]
+@nushkee @EliizaAI
+@snapend
+
 ---
 @snap[midpoint span-50]
 # A bit about me 
 @snapend
+
+---
+
+# Challenges of NLP 
+
+<br>
+
+- Ambiguity 
+- Variability 
+- Evolution  
+- Structural complexity: language is discrete, compositional and sparse 
+- Large vocabulary, vast amounts of data
+- Quality of data: errors and inconsistencies 
 
 ---
 
@@ -34,21 +51,11 @@
 
 We will focus on text processing 
 
----
-
-# Challenges of text processing 
-
-<br>
-
-- Ambiguity 
-- Variability 
-- Evolution  
-- Structural complexity: language is discrete, compositional and sparse 
-- Large vocabulary, vast amounts of data
-- Quality of data: errors and inconsistencies 
  
 ---
 # spaCy
+
+<br>
 
 - Fast: Cython
 - Wide variety of features 
@@ -58,8 +65,12 @@ We will focus on text processing
 ---
 # spacyr 
 
+<br>
+
 - Runs spacy in the background
 - Will install miniconda, python and spacy 
+
+<br>
 
 ```r
 spacy_install(conda = "auto", version = "latest", 
@@ -77,10 +88,11 @@ spacy_initialize(model = "en_core_web_lg", python_executable = NULL,
 ---
 # Key components of spacyr
 
+<br>
+
 
 - Preprocessing
 - Linguistic features 
-- Language models
 - Word embeddings 
 
 
@@ -173,9 +185,6 @@ lemmatised %>% filter(is_stop != TRUE) %>% `[[`('token')
 # Linguistic features
 ## Parts of speech 
 ```r
-text <- "The Radch Empire was created thousands of years ago. 
-         Its leader is Anaander Mianaai. 
-         She's many-bodied and divided in at least 2 factions."
 pos <- spacy_parse(text, pos = TRUE, tag = TRUE, lemma = FALSE,
                    entity = FALSE, dependency = FALSE, nounphrase = FALSE,
                    multithread = TRUE)
@@ -220,7 +229,9 @@ dep %>% filter(sentence_id == 2)
 @snapend
 
 ---
-# Noun phrases 
+# Linguistic features
+## Noun phrases 
+
 ```r
 text <- "The Radch Empire was created thousands of years ago. 
          Its leader is Anaander Mianaai. 
@@ -240,7 +251,8 @@ nounphrase_extract(nounphrases, concatenator = "_")
 
 
 ---
-# Entities
+# Linguistic features
+## Entities
 ```r
 text <- "The Radch Empire was created thousands of years ago. 
          Its leader is Anaander Mianaai. 
@@ -257,7 +269,11 @@ entity_extract(entities, type = 'all', concatenator = "_")
 ```
 --- 
 # Word embeddings
+
 [Global Vectors for word representation](https://nlp.stanford.edu/projects/glove/)
+
+<br>
+
 ```r
 text <- "apple orange chair rumpelstiltskin"
 vectors <- spacy_parse(text, pos = FALSE, tag = FALSE, lemma = FALSE,
@@ -270,7 +286,10 @@ vectors[1:2,] %>% select(token, has_vector, vector_norm)
 #2          orange       TRUE    6.542022
 ```
 ---
-# Semantic similarity 
+# Word embeddings
+## Semantic similarity 
+
+<br>
 
 Cosine similarity scores between:
 
@@ -283,7 +302,7 @@ Cosine similarity scores between:
 @transition[none]
 # Additional attributes  
 
-Check spaCy doc for [full list of token attributes](https://spacy.io/api/token). 
+<br>
 
 - lower_, is_lower,
 - shape_,
@@ -291,6 +310,10 @@ Check spaCy doc for [full list of token attributes](https://spacy.io/api/token).
 - is_oov,
 - is_space, is_bracket, is_quote, etc.
 
+
+Check spaCy doc for [full list of token attributes](https://spacy.io/api/token). 
+
+<br>
 
 ```r
 spacy_finalize()
@@ -300,15 +323,21 @@ spacy_finalize()
 --- 
 # Other text processing tasks
 
+<br>
+
 - Sentiment scores 
 - Entity linking 
 - Coreference resolution
 - Open information extraction 
 
-## Stanford [coreNLP](https://stanfordnlp.github.io/CoreNLP/)
+<br>
+
+Stanford [coreNLP](https://stanfordnlp.github.io/CoreNLP/)
 
 ---
 # Open information extraction
+
+<br>
 
 ```r
 downloadCoreNLP()
@@ -328,6 +357,9 @@ getOpenIE(annObj) %>% select(subject, relation, object)
 ```
 ---
 # Coreference Resolution 
+
+<br>
+
 ```r
 getCoreference(annObj)
 #  corefId sentence start end head startIndex endIndex
@@ -343,7 +375,7 @@ Two coreference clusters:
 2. Anaander Mianaai, Its leader, She  
 --- 
 # One step further
-
+ <br>
 
 - Pretrain with domain-specific text
 - Add custom entity types 
