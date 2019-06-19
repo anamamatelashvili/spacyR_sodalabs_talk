@@ -12,6 +12,12 @@
 @nushkee @EliizaAI
 @snapend
 
+--- 
+
+Here is [the link](https://pdfs.semanticscholar.org/3fc9/7768dc0b36449ec377d6a4cad8827908d5b4.pdf) to the paper talking about sentence embedidngs as weighted averages of word embeddings. 
+
+When using TFIDF weights one needs to be careful to not double count the word frequencies (if a word appears multiple times in a sentence only include it once in the weighted average). 
+
 ---
 @snap[midpoint span-50]
 # A bit about me 
