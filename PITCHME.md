@@ -19,6 +19,20 @@ August 29, 2019
 @snapend
 
 ---
+@snap[midpoint span-50]
+# A couple of graphs + 7-ac theorem.  
+@snapend
+
+---
+The Radch Empire was created thousands of years ago. 
+Its leader is Anaander Mianaai. 
+She's many-bodied and divided in at least 2 conflicting factions.
+
+@snap[midpoint span-50]
+# Knowledge graph derived from this text. 
+@snapend
+
+---
 
 # Challenges of NLP 
 
@@ -97,6 +111,13 @@ spacy_initialize(model = "en_core_web_lg", python_executable = NULL,
 - Linguistic features 
 - Word embeddings 
 
+---
+
+@snap[midpoint span-50]
+# Workflow for the knowledge graph example with spacyr components
+
+Explain that we need something stronger such as CoreNLP and indicate its components used in the workflow. 
+@snapend
 
 ---
 # Preprocessing 
