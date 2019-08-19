@@ -5,7 +5,7 @@
 @snapend
 
 @snap[south-east span-30]
-18 June, 2019
+August 29, 2019
 @snapend
 
 @snap[south-west span-40]
