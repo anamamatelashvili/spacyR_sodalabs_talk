@@ -26,7 +26,7 @@ August 29, 2019
 ---
 The Radch Empire was created thousands of years ago. 
 Its leader is Anaander Mianaai. 
-She's many-bodied and divided in at least 2 conflicting factions.
+She's many-bodied and divided in at least 2 factions.
 
 
 # Knowledge graph derived from this text. 
@@ -124,7 +124,7 @@ Explain that we need something stronger such as CoreNLP and indicate its compone
 ```r
 text <- "The Radch Empire was created thousands of years ago. 
          Its leader is Anaander Mianaai. 
-         She's many-bodied and divided in at least 2 conflicting factions."
+         She's many-bodied and divided in at least 2 factions."
 tokenised <- spacy_tokenize(text, what = "word", remove_punct = TRUE,
               remove_url = FALSE, remove_numbers = TRUE,
               remove_separators = TRUE, remove_symbols = FALSE, 
