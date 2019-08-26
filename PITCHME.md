@@ -1,7 +1,8 @@
 
-# Natural Language Processing with spaCy in R
+# Natural Language Processing in R 
+## with spaCy and CoreNLP
 @snap[east span-100]
-## Ana Mamatelashvili 
+### Ana Mamatelashvili 
 @snapend
 
 @snap[south-east span-30]
@@ -20,16 +21,28 @@ August 29, 2019
 
 ---
 
-# A couple of graphs + 7-ac theorem.  
+# Graphs
+
+<br>
+
+- Vertices/Nodes
+- Connected with edges that could be:
+  - Directed
+  - Weighted 
+  
+  (insert graph example, four vertices triangle+edge and a triod)
 
 
 ---
+
+# Knowledge Graphs 
+
 The Radch Empire was created thousands of years ago. 
 Its leader is Anaander Mianaai. 
 She's many-bodied and divided in at least 2 factions.
 
 
-# Knowledge graph derived from this text. 
+(insert Knowledge graph derived from this text.) 
 
 
 ---
@@ -64,18 +77,40 @@ She's many-bodied and divided in at least 2 factions.
 
 <br>
 
-We will focus on text processing 
+We will focus on text processing features needed for knowledge graph building and querying. 
 
  
 ---
-# spaCy
+
+### CoreNLP
+- Wide range of grammatical analysis tools and models 
+- A fast, robust annotator for arbitrary texts, widely used in production
+- Supports multiple human languages 
+- APIs available for many programming languages such as Python and R
+
+
+<br>
+### spaCy
+- Fast: Cython
+- Wide variety of text processing features 
+- Several pretrained Enlish models
+- Good docs
+
+
+--- 
+# CoreNLP for R
+
+Stanford [coreNLP](https://stanfordnlp.github.io/CoreNLP/)
+
+```r
+downloadCoreNLP()
+initCoreNLP(type='english_all')
+```
 
 <br>
 
-- Fast: Cython
-- Wide variety of features 
-- Several pretrained Enlish models
-- Good docs
+- Needs a lot of memory 
+- Slow
 
 ---
 # spacyr 
@@ -99,26 +134,98 @@ spacy_initialize(model = "en_core_web_lg", python_executable = NULL,
                  virtualenv = NULL, condaenv = NULL, ask = FALSE,
                  refresh_settings = FALSE, save_profile = FALSE, 
                  check_env = TRUE, entity = TRUE)
+                 
+spacy_parse(text, pos = FALSE, tag = FALSE, lemma = FALSE,
+                           entity = TRUE, dependency = FALSE, nounphrase = FALSE,
+                           multithread = TRUE)                 
 ```
 
 ---
-# Key components of spacyr
+# Key components 
 
 <br>
 
+CoreNLP 
+  - Sentiment scores 
+  - Entity linking 
+  - Coreference resolution
+  - Open information extraction 
 
-- Preprocessing
-- Linguistic features 
-- Word embeddings 
+spacyR
+  - Preprocessing
+  - Linguistic features 
+  - Word embeddings 
+
+
 
 ---
 
-# Workflow for the knowledge graph example with spacyr components
+# Workflow for the knowledge graph
 
-Explain that we need something stronger such as CoreNLP and indicate its components used in the workflow. 
-
-
+(Insert a workflow diagram with components used in the knowledge graph workflow:
+  - building
+  - querying
+ Label with the tool name)
+  
 ---
+# Nodes: Entities (Either spacyR or CoreNLP)
+```r
+text <- "The Radch Empire was created thousands of years ago. 
+         Its leader is Anaander Mianaai. 
+         She's many-bodied and divided in at least 2 factions."
+entities <- spacy_parse(text, pos = FALSE, tag = FALSE, lemma = FALSE,
+                           entity = TRUE, dependency = FALSE, nounphrase = FALSE,
+                           multithread = TRUE)
+entity_extract(entities, type = 'all', concatenator = "_")
+#  doc_id sentence_id                 entity entity_type
+#1  text1           1       The_Radch_Empire         GPE
+#2  text1           1 thousands_of_years_ago        DATE
+#3  text1           2       Anaander_Mianaai      PERSON
+#4  text1           3             at_least_2    CARDINAL
+```
+---
+# Relations/edges: Open information extraction (CoreNLP)
+
+<br>
+
+```r
+downloadCoreNLP()
+initCoreNLP(type='english_all')
+text <- "The Radch Empire was created thousands of years ago. 
+         Its leader is Anaander Mianaai. 
+         She's many-bodied and divided in at least 2 factions."
+annObj <- annotateString(text)
+getOpenIE(annObj) %>% select(subject, relation, object)
+#       subject    relation                 object
+#1 Radch Empire was created     thousands of years
+#2 Radch Empire was created thousands of years ago
+#3 Radch Empire was created              thousands
+#4   Its leader          is       Anaander Mianaai
+#5          She  divided in    at least 2 factions
+#6          She         has            many-bodied
+```
+---
+# Sort out ambiguities: Coreference Resolution (CoreNLP)
+
+<br>
+
+```r
+getCoreference(annObj)
+#  corefId sentence start end head startIndex endIndex
+#1       1        1     1   4    3          1        3
+#2       1        2     1   2    1         11       11
+#3       2        2     4   6    5         14       15
+#4       2        2     1   3    2         11       12
+#5       2        3     1   2    1         17       17
+```
+
+Two coreference clusters:
+1. The Radch Empire, Its
+2. Anaander Mianaai, Its leader, She  
+
+
+
+--- 
 # Preprocessing 
 ## Tokenisation
 ```r
@@ -268,25 +375,6 @@ nounphrase_extract(nounphrases, concatenator = "_")
 #6  text1           3 at_least_2_factions
 ```
 
-
----
-# Linguistic features
-## Entities
-```r
-text <- "The Radch Empire was created thousands of years ago. 
-         Its leader is Anaander Mianaai. 
-         She's many-bodied and divided in at least 2 factions."
-entities <- spacy_parse(text, pos = FALSE, tag = FALSE, lemma = FALSE,
-                           entity = TRUE, dependency = FALSE, nounphrase = FALSE,
-                           multithread = TRUE)
-entity_extract(entities, type = 'all', concatenator = "_")
-#  doc_id sentence_id                 entity entity_type
-#1  text1           1       The_Radch_Empire         GPE
-#2  text1           1 thousands_of_years_ago        DATE
-#3  text1           2       Anaander_Mianaai      PERSON
-#4  text1           3             at_least_2    CARDINAL
-```
---- 
 # Word embeddings
 
 [Global Vectors for word representation](https://nlp.stanford.edu/projects/glove/)
@@ -353,46 +441,7 @@ spacy_finalize()
 
 Stanford [coreNLP](https://stanfordnlp.github.io/CoreNLP/)
 
----
-# Open information extraction
 
-<br>
-
-```r
-downloadCoreNLP()
-initCoreNLP(type='english_all')
-text <- "The Radch Empire was created thousands of years ago. 
-         Its leader is Anaander Mianaai. 
-         She's many-bodied and divided in at least 2 factions."
-annObj <- annotateString(text)
-getOpenIE(annObj) %>% select(subject, relation, object)
-#       subject    relation                 object
-#1 Radch Empire was created     thousands of years
-#2 Radch Empire was created thousands of years ago
-#3 Radch Empire was created              thousands
-#4   Its leader          is       Anaander Mianaai
-#5          She  divided in    at least 2 factions
-#6          She         has            many-bodied
-```
----
-# Coreference Resolution 
-
-<br>
-
-```r
-getCoreference(annObj)
-#  corefId sentence start end head startIndex endIndex
-#1       1        1     1   4    3          1        3
-#2       1        2     1   2    1         11       11
-#3       2        2     4   6    5         14       15
-#4       2        2     1   3    2         11       12
-#5       2        3     1   2    1         17       17
-```
-
-Two coreference clusters:
-1. The Radch Empire, Its
-2. Anaander Mianaai, Its leader, She  
---- 
 # One step further
  <br>
 
