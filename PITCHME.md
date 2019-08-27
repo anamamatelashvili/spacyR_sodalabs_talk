@@ -242,19 +242,16 @@ Two coreference clusters:
 ---
 # Find entities: noun phrases 
 
+<br>
+
 ```r
 text <- "When was the Radch Empire founded?"
 nounphrases <- spacy_parse(text, pos = FALSE, tag = FALSE, lemma = FALSE,
                    entity = FALSE, dependency = FALSE, nounphrase = TRUE,
                    multithread = TRUE)
 nounphrase_extract(nounphrases, concatenator = "_")
-#  doc_id sentence_id          nounphrase
-#1  text1           1    The_Radch_Empire
-#2  text1           1               years
-#3  text1           2          Its_leader
-#4  text1           2    Anaander_Mianaai
-#5  text1           3                 She
-#6  text1           3 at_least_2_factions
+#  doc_id sentence_id       nounphrase
+#1  text1           1 the_Radch_Empire
 ```
 
 ---
@@ -264,16 +261,14 @@ text <- "When was the Radch Empire founded?"
 pos <- spacy_parse(text, pos = TRUE, tag = TRUE, lemma = FALSE,
                    entity = FALSE, dependency = FALSE, nounphrase = FALSE,
                    multithread = TRUE)
-pos %>% filter(pos == 'ADJ' | pos == 'VERB')
-#  doc_id sentence_id token_id   token  pos tag
-#1  text1           1        4     was VERB VBD
-#2  text1           1        5 created VERB VBN
-#3  text1           2        3      is VERB VBZ
-#4  text1           3        2      's VERB VBZ
-#5  text1           3        3    many  ADJ  JJ
-#6  text1           3        5  bodied  ADJ  JJ
-#7  text1           3        7 divided VERB VBN
-#8  text1           3       10   least  ADJ JJS
+#  doc_id sentence_id token_id   token   pos  tag
+#1  text1           1        1    When   ADV  WRB
+#2  text1           1        2     was  VERB  VBD
+#3  text1           1        3     the   DET   DT
+#4  text1           1        4   Radch PROPN NNPS
+#5  text1           1        5  Empire PROPN  NNP
+#6  text1           1        6 founded  VERB  VBD
+#7  text1           1        7       ? PUNCT    .
 ```
 
 See [annotation specifications](https://spacy.io/api/annotation) for the full tag list. 
@@ -286,20 +281,22 @@ text <- "When was the Radch Empire founded?"
 dep <- spacy_parse(text, pos = FALSE, tag = FALSE, lemma = FALSE,
                    entity = FALSE, dependency = TRUE, nounphrase = FALSE,
                    multithread = TRUE)
-dep %>% filter(sentence_id == 2)
-#  doc_id sentence_id token_id    token head_token_id  dep_rel
-#1  text1           2        1      Its             2     poss
-#2  text1           2        2   leader             3    nsubj
-#3  text1           2        3       is             3     ROOT
-#4  text1           2        4 Anaander             5 compound
-#5  text1           2        5  Mianaai             3     attr
-#6  text1           2        6        .             3    punct
+#  doc_id sentence_id token_id   token head_token_id  dep_rel
+#1  text1           1        1    When             6   advmod
+#2  text1           1        2     was             6  auxpass
+#3  text1           1        3     the             5      det
+#4  text1           1        4   Radch             5 compound
+#5  text1           1        5  Empire             6    nsubj
+#6  text1           1        6 founded             6     ROOT
+#7  text1           1        7       ?             6    punct
 ```
 
 ---
 @snap[midpoint span-100]
-![](dep.png)
+![](dep.png) 
 @snapend
+
+(replace this dep pic)
 
 
 ---
@@ -310,15 +307,18 @@ dep %>% filter(sentence_id == 2)
 <br>
 
 ```r
-text <- "When was the Radch Empire founded?"
+text <- "founded created leader is divided"
 vectors <- spacy_parse(text, pos = FALSE, tag = FALSE, lemma = FALSE,
              entity = FALSE, dependency = FALSE, nounphrase = FALSE,
              multithread = TRUE, 
              additional_attributes = c('has_vector', 'vector_norm', 'vector'))
-vectors[1:2,] %>% select(token, has_vector, vector_norm) 
-#            token has_vector vector_norm
-#1           apple       TRUE    7.134685
-#2          orange       TRUE    6.542022
+vectors %>% select(token, has_vector, vector_norm) 
+#    token has_vector vector_norm
+#1 founded       TRUE    6.329316
+#2 created       TRUE    5.515051
+#3  leader       TRUE    6.531607
+#4      is       TRUE    4.890306
+#5 divided       TRUE    5.766988
 ```
 ---
 
@@ -328,8 +328,10 @@ vectors[1:2,] %>% select(token, has_vector, vector_norm)
 
 Cosine similarity scores between:
 
-- founded and created: (insert score)
-- versus is a leader of and is and is divided in 
+- founded and created: 0.4530104
+- founded and leader: 0.4157298
+- founded and is: 0.2928721
+- founded and divided: 0.2074316
 
 --- 
 # When was the Radch Empire founded?
@@ -337,7 +339,7 @@ Cosine similarity scores between:
 
 (insert the knowledge graph here with queries relation and nodes highlighted)
 
-### The Radch Empire was created thousands of years ago.
+### Thousands of years ago.
 
 
 --- 
