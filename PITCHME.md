@@ -1,6 +1,6 @@
 
-# Natural Language Processing in R 
-## with spaCy and CoreNLP
+# Natural Language Processing
+## with spaCy and CoreNLP in R
 @snap[east span-100]
 ### Ana Mamatelashvili 
 @snapend
@@ -25,7 +25,7 @@ August 29, 2019
 
 <br>
 
-- Vertices/Nodes
+- Vertices or nodes
 - Connected with edges that could be:
   - Directed
   - Weighted 
@@ -37,8 +37,8 @@ August 29, 2019
 
 # Knowledge Graphs 
 
-The Radch Empire was created thousands of years ago. 
-Its leader is Anaander Mianaai. 
+The Radch Empire was created thousands of years ago. <br>
+Its leader is Anaander Mianaai. <br>
 She's many-bodied and divided in at least 2 factions.
 
 
