@@ -90,6 +90,7 @@ We will focus on text processing features needed for knowledge graph building an
 
 
 <br>
+
 ### spaCy
 - Fast: Cython
 - Wide variety of text processing features 
@@ -99,6 +100,7 @@ We will focus on text processing features needed for knowledge graph building an
 
 --- 
 # CoreNLP for R
+By Christopher Manning, Mihai Surdeanu, John Bauer, Jenny Finkel, Steven Bethard, David McClosky
 
 Stanford [coreNLP](https://stanfordnlp.github.io/CoreNLP/)
 
@@ -110,7 +112,8 @@ initCoreNLP(type='english_all')
 <br>
 
 - Needs a lot of memory 
-- Slow
+- Depends on Java
+
 
 ---
 # spacyr 
@@ -134,10 +137,23 @@ spacy_initialize(model = "en_core_web_lg", python_executable = NULL,
                  virtualenv = NULL, condaenv = NULL, ask = FALSE,
                  refresh_settings = FALSE, save_profile = FALSE, 
                  check_env = TRUE, entity = TRUE)
-                 
-spacy_parse(text, pos = FALSE, tag = FALSE, lemma = FALSE,
-                           entity = TRUE, dependency = FALSE, nounphrase = FALSE,
-                           multithread = TRUE)                 
+           
+# spacy_finalize()
+```
+---
+
+```r
+text <- "The Radch Empire was created thousands of years ago. 
+         Its leader is Anaander Mianaai. 
+         She's many-bodied and divided in at least 2 factions."
+
+# Parse text with CoreNLP
+annObj <- annotateString(text)
+
+# Parse text with spaCy
+spacy_parse(text, pos = TRUE, tag = TRUE, lemma = TRUE,
+                  entity = TRUE, dependency = TRUE, nounphrase = TRUE,
+                  multithread = TRUE)
 ```
 
 ---
@@ -166,6 +182,8 @@ spacyR
   - building
   - querying
  Label with the tool name)
+ 
+ (How should this be incorporated with the rest of the workflow component slides -- on each slide or preceding each slide?)
   
 ---
 # Nodes: Entities (Either spacyR or CoreNLP)
@@ -189,8 +207,6 @@ entity_extract(entities, type = 'all', concatenator = "_")
 <br>
 
 ```r
-downloadCoreNLP()
-initCoreNLP(type='english_all')
 text <- "The Radch Empire was created thousands of years ago. 
          Its leader is Anaander Mianaai. 
          She's many-bodied and divided in at least 2 factions."
@@ -223,15 +239,17 @@ Two coreference clusters:
 1. The Radch Empire, Its
 2. Anaander Mianaai, Its leader, She  
 
+---
 
+(insert the knowledge graph here again)
+
+### How to query a knowledge graph? 
 
 --- 
 # Preprocessing 
 ## Tokenisation
 ```r
-text <- "The Radch Empire was created thousands of years ago. 
-         Its leader is Anaander Mianaai. 
-         She's many-bodied and divided in at least 2 factions."
+text <- "When was the Radch Empire founded?"
 tokenised <- spacy_tokenize(text, what = "word", remove_punct = TRUE,
               remove_url = FALSE, remove_numbers = TRUE,
               remove_separators = TRUE, remove_symbols = FALSE, 
@@ -248,25 +266,9 @@ tokenised
  
 ---
 # Preprocessing 
-## Sentence segmentation 
-```r
-text <- "The Radch Empire was created thousands of years ago. 
-         Its leader is Anaander Mianaai 
-         She's many-bodied and divided in at least 2 factions."
-sentences <- spacy_tokenize(text, what = "sentence", remove_punct = TRUE,
-               remove_url = FALSE, remove_numbers = TRUE,
-               remove_separators = TRUE, remove_symbols = FALSE, 
-               padding = TRUE, multithread = TRUE, output = "list")
-sentences
-#$text1
-#[1] "The Radch Empire was created thousands of years ago." 
-#[2] "Its leader is Anaander Mianaai"                       
-#[3] "She's many-bodied and divided in at least 2 factions."  
-``` 
----
-# Preprocessing 
 ## Lemmatisation
 ```r
+text <- "When was the Radch Empire founded?"
 lemmatised <- spacy_parse(text, pos = FALSE, tag = FALSE, lemma = TRUE,
             entity = FALSE, dependency = FALSE, nounphrase = FALSE,
             multithread = TRUE)
@@ -286,31 +288,10 @@ lemmatised %>% filter(token != lemma)
 ```
 
 ---
-# Preprocessing
-## Stopwords
-```r
-text <- "The Radch Empire was created thousands of years ago. 
-         Its leader is Anaander Mianaai. 
-         She's many-bodied and divided in at least 2 factions."        
-unnest_tokens(lemmatised, word, token, to_lower = TRUE) %>%
-  anti_join(stop_words) %>% `[[`('word')
-#Joining, by = "word"
-# [1] "radch"     "empire"    "created"   "thousands" "ago"      
-# [6] "leader"    "anaander"  "mianaai"   "bodied"    "divided"  
-#[11] "2"         "factions"
-lemmatised <- spacy_parse(text, pos = FALSE, tag = FALSE, lemma = TRUE,
-              entity = FALSE, dependency = FALSE, nounphrase = FALSE,
-              multithread = TRUE, additional_attributes = 'is_stop')
-lemmatised %>% filter(is_stop == FALSE) %>% `[[`('token')
-# [1] "Radch"     "Empire"    "created"   "thousands" "years"    
-# [6] "ago"       "."         "leader"    "Anaander"  "Mianaai"  
-#[11] "."         "-"         "bodied"    "divided"   "2"        
-#[16] "factions"  "."                     
-``` 
----
 # Linguistic features
 ## Parts of speech 
 ```r
+text <- "When was the Radch Empire founded?"
 pos <- spacy_parse(text, pos = TRUE, tag = TRUE, lemma = FALSE,
                    entity = FALSE, dependency = FALSE, nounphrase = FALSE,
                    multithread = TRUE)
@@ -333,9 +314,7 @@ See [annotation specifications](https://spacy.io/api/annotation) for the full ta
 ## Dependencies
 
 ```r
-text <- "The Radch Empire was created thousands of years ago. 
-         Its leader is Anaander Mianaai. 
-         She's many-bodied and divided in at least 2 factions."
+text <- "When was the Radch Empire founded?"
 dep <- spacy_parse(text, pos = FALSE, tag = FALSE, lemma = FALSE,
                    entity = FALSE, dependency = TRUE, nounphrase = FALSE,
                    multithread = TRUE)
@@ -359,9 +338,7 @@ dep %>% filter(sentence_id == 2)
 ## Noun phrases 
 
 ```r
-text <- "The Radch Empire was created thousands of years ago. 
-         Its leader is Anaander Mianaai. 
-         She's many-bodied and divided in at least 2 factions."
+text <- "When was the Radch Empire founded?"
 nounphrases <- spacy_parse(text, pos = FALSE, tag = FALSE, lemma = FALSE,
                    entity = FALSE, dependency = FALSE, nounphrase = TRUE,
                    multithread = TRUE)
@@ -382,7 +359,7 @@ nounphrase_extract(nounphrases, concatenator = "_")
 <br>
 
 ```r
-text <- "apple orange chair rumpelstiltskin"
+text <- "When was the Radch Empire founded?"
 vectors <- spacy_parse(text, pos = FALSE, tag = FALSE, lemma = FALSE,
              entity = FALSE, dependency = FALSE, nounphrase = FALSE,
              multithread = TRUE, 
@@ -393,6 +370,7 @@ vectors[1:2,] %>% select(token, has_vector, vector_norm)
 #2          orange       TRUE    6.542022
 ```
 ---
+
 # Word embeddings
 ## Semantic similarity 
 
@@ -400,54 +378,28 @@ vectors[1:2,] %>% select(token, has_vector, vector_norm)
 
 Cosine similarity scores between:
 
-- apple and orange: 0.5618917
-- apple and chair: 0.1714211
-- apple and rumpelstiltskin: -0.1144477
+- founded and created: (insert score)
+- versus is a leader of and is and is divided in 
+
+--- 
+# When was the Radch Empire founded?
+
+
+(insert the knowledge graph here with queries relation and nodes highlighted)
+
+### The Radch Empire was created thousands of years ago.
 
 
 --- 
-@transition[none]
-# Additional attributes  
-
-<br>
-
-- lower_, is_lower,
-- shape_,
-- is_alpha, is_digit, is_ascii, like_num, is_currency, 
-- is_oov,
-- is_space, is_bracket, is_quote, etc.
-
-
-Check spaCy docs for [the full list of token attributes](https://spacy.io/api/token). 
-
-<br>
-
-```r
-spacy_finalize()
-```
-
-
---- 
-# Other text processing tasks
-
-<br>
-
-- Sentiment scores 
-- Entity linking 
-- Coreference resolution
-- Open information extraction 
-
-<br>
-
-Stanford [coreNLP](https://stanfordnlp.github.io/CoreNLP/)
-
-
-# One step further
+# Next steps
  <br>
 
-- Pretrain with domain-specific text
-- Add custom entity types 
-- Make domain-specific word embeddings 
+What to do with a larger and messier text corpus?
+
+- Ontology
+- Custon entity recogniser
+- Graph completion 
+- Natural language to query model
 
 
 ---
