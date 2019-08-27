@@ -25,14 +25,12 @@ August 29, 2019
 
 <br>
 
-- Vertices or nodes
-- Connected with edges that could be:
-  - Directed
-  - Weighted 
+- Nodes
+- Connected with edges 
   
   (insert graph example, four vertices triangle+edge and a triod)
 
-
+The first graph has the property that all vertices can be visited without retracing your steps but the second graph does not. 
 ---
 
 # Knowledge Graphs 
