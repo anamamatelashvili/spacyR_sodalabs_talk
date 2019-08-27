@@ -175,12 +175,9 @@ spacyR
 
 # Workflow for KG
 
-(Insert a workflow diagram with components used in the knowledge graph workflow:
-  - building
-  - querying
- Label with the tool name)
- 
- (How should this be incorporated with the rest of the workflow component slides -- on each slide or preceding each slide?)
+@snap[midpoint span-100]
+![](KG.png)
+@snapend
   
 ---
 # Nodes: Entities 
@@ -242,51 +239,26 @@ Two coreference clusters:
 
 ### How to query a knowledge graph? 
 
---- 
-# Preprocessing 
-## Tokenisation
-```r
-text <- "When was the Radch Empire founded?"
-tokenised <- spacy_tokenize(text, what = "word", remove_punct = TRUE,
-              remove_url = FALSE, remove_numbers = TRUE,
-              remove_separators = TRUE, remove_symbols = FALSE, 
-              padding = TRUE, multithread = TRUE, output = "list")
-tokenised
-#$text1
-# [1] "The"       "Radch"     "Empire"    "was"       "created"  
-# [6] "thousands" "of"        "years"     "ago"       ""         
-#[11] "Its"       "leader"    "is"        "Anaander"  "Mianaai"  
-#[16] ""          "She"       "'s"        "many"      ""         
-#[21] "bodied"    "and"       "divided"   "in"        "at"       
-#[26] "least"     ""          "factions"  ""     
-```
- 
 ---
-# Preprocessing 
-## Lemmatisation
+# Find entities: noun phrases 
+
 ```r
 text <- "When was the Radch Empire founded?"
-lemmatised <- spacy_parse(text, pos = FALSE, tag = FALSE, lemma = TRUE,
-            entity = FALSE, dependency = FALSE, nounphrase = FALSE,
-            multithread = TRUE)
-lemmatised %>% filter(token != lemma)
-#   doc_id sentence_id token_id     token    lemma
-#1   text1           1        1       The      the
-#2   text1           1        4       was       be
-#3   text1           1        5   created   create
-#4   text1           1        6 thousands thousand
-#5   text1           1        8     years     year
-#6   text1           2        1       Its   -PRON-
-#7   text1           2        3        is       be
-#8   text1           3        1       She   -PRON-
-#9   text1           3        2        's       be
-#10  text1           3        7   divided   divide
-#11  text1           3       12  factions  faction
+nounphrases <- spacy_parse(text, pos = FALSE, tag = FALSE, lemma = FALSE,
+                   entity = FALSE, dependency = FALSE, nounphrase = TRUE,
+                   multithread = TRUE)
+nounphrase_extract(nounphrases, concatenator = "_")
+#  doc_id sentence_id          nounphrase
+#1  text1           1    The_Radch_Empire
+#2  text1           1               years
+#3  text1           2          Its_leader
+#4  text1           2    Anaander_Mianaai
+#5  text1           3                 She
+#6  text1           3 at_least_2_factions
 ```
 
 ---
-# Linguistic features
-## Parts of speech 
+# Find verbs: parts of speech 
 ```r
 text <- "When was the Radch Empire founded?"
 pos <- spacy_parse(text, pos = TRUE, tag = TRUE, lemma = FALSE,
@@ -307,8 +279,7 @@ pos %>% filter(pos == 'ADJ' | pos == 'VERB')
 See [annotation specifications](https://spacy.io/api/annotation) for the full tag list. 
 
 ---
-# Linguistic features
-## Dependencies
+# Pair them up: dependencies 
 
 ```r
 text <- "When was the Radch Empire founded?"
@@ -330,26 +301,9 @@ dep %>% filter(sentence_id == 2)
 ![](dep.png)
 @snapend
 
+
 ---
-# Linguistic features
-## Noun phrases 
-
-```r
-text <- "When was the Radch Empire founded?"
-nounphrases <- spacy_parse(text, pos = FALSE, tag = FALSE, lemma = FALSE,
-                   entity = FALSE, dependency = FALSE, nounphrase = TRUE,
-                   multithread = TRUE)
-nounphrase_extract(nounphrases, concatenator = "_")
-#  doc_id sentence_id          nounphrase
-#1  text1           1    The_Radch_Empire
-#2  text1           1               years
-#3  text1           2          Its_leader
-#4  text1           2    Anaander_Mianaai
-#5  text1           3                 She
-#6  text1           3 at_least_2_factions
-```
-
-# Word embeddings
+# Relate to the KG: word embeddings
 
 [Global Vectors for word representation](https://nlp.stanford.edu/projects/glove/)
 
@@ -368,8 +322,7 @@ vectors[1:2,] %>% select(token, has_vector, vector_norm)
 ```
 ---
 
-# Word embeddings
-## Semantic similarity 
+# Relate to the KG: semantic similarity 
 
 <br>
 
