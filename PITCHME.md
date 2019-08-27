@@ -29,8 +29,7 @@ August 29, 2019
 - Connected with edges 
   
   (insert graph example, four vertices triangle+edge and a triod)
-
-The first graph has the property that all vertices can be visited without retracing your steps but the second graph does not. 
+ 
 ---
 
 # Knowledge Graphs 
@@ -73,7 +72,6 @@ She's many-bodied and divided in at least 2 factions.
 - Speech recognition 
 - OCR  
 
-<br>
 
 We will focus on text processing features needed for knowledge graph building and querying. 
 
@@ -122,8 +120,6 @@ By Kenneth Benoit, Akitaka Matsuo
 - Will install Miniconda, Python and spaCy 
 - Will run spaCy in the background
 
-<br>
-
 ```r
 spacy_install(conda = "auto", version = "latest", 
               lang_models = "en_core_web_lg",
@@ -139,6 +135,9 @@ spacy_initialize(model = "en_core_web_lg", python_executable = NULL,
 # spacy_finalize()
 ```
 ---
+# Parsing text
+
+<br>
 
 ```r
 text <- "The Radch Empire was created thousands of years ago. 
@@ -174,7 +173,7 @@ spacyR
 
 ---
 
-# Workflow for the knowledge graph
+# Workflow for KG
 
 (Insert a workflow diagram with components used in the knowledge graph workflow:
   - building
@@ -184,7 +183,7 @@ spacyR
  (How should this be incorporated with the rest of the workflow component slides -- on each slide or preceding each slide?)
   
 ---
-# Nodes: Entities (Either spacyR or CoreNLP)
+# Nodes: Entities 
 ```r
 text <- "The Radch Empire was created thousands of years ago. 
          Its leader is Anaander Mianaai. 
@@ -200,7 +199,7 @@ entity_extract(entities, type = 'all', concatenator = "_")
 #4  text1           3             at_least_2    CARDINAL
 ```
 ---
-# Relations/edges: Open information extraction (CoreNLP)
+# Edges: Open information extraction
 
 <br>
 
@@ -219,7 +218,7 @@ getOpenIE(annObj) %>% select(subject, relation, object)
 #6          She         has            many-bodied
 ```
 ---
-# Sort out ambiguities: Coreference Resolution (CoreNLP)
+# Ambiguities: Coreference Resolution 
 
 <br>
 
@@ -392,7 +391,7 @@ Cosine similarity scores between:
 # Next steps
  <br>
 
-What to do with a larger and messier text corpus?
+What to do with a large and messy text corpus?
 
 - Ontology
 - Custon entity recogniser
