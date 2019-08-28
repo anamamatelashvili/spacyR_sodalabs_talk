@@ -231,8 +231,6 @@ getOpenIE(annObj) %>% select(subject, relation, object)
 #6          She         has            many-bodied
 ```
 ---
-# Ambiguities: Coreference Resolution 
-
 @snap[north-west span-50]
 # Ambiguities: Coreference Resolution 
 @snapend
@@ -264,16 +262,25 @@ Two coreference clusters:
 ![](radch_KG.png)
 @snapend
 
+
+@snap[south span-100]
 ### How do we query a knowledge graph? 
+@snapend
+
 
 ---
+@snap[north-west span-50]
 # Find entities: noun phrases 
+@snapend
 
 @snap[north-east span-50]
+<br>
 ![](KG1-5.png)
 @snapend
 
 
+
+<br>
 
 <br>
 
