@@ -296,8 +296,6 @@ dep <- spacy_parse(text, pos = FALSE, tag = FALSE, lemma = FALSE,
 ![](dep.png) 
 @snapend
 
-(replace this dep pic)
-
 
 ---
 # Relate to the KG: word embeddings
