@@ -28,11 +28,11 @@ August 29, 2019
 - Nodes
 - Connected with edges 
   
-@snap[west span-70]
+@snap[south-west span-40]
 ![](graph1.png)
 @snapend
 
-@snap[east span-70]
+@snap[south-east span-40]
 ![](graph2.png)
 @snapend
  
