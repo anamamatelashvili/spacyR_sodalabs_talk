@@ -303,6 +303,7 @@ nounphrase_extract(nounphrases, concatenator = "_")
 @snapend
 
 <br>
+<br>
 ```r
 text <- "When was the Radch Empire founded?"
 pos <- spacy_parse(text, pos = TRUE, tag = TRUE, lemma = FALSE,
@@ -328,6 +329,7 @@ See [annotation specifications](https://spacy.io/api/annotation) for the full ta
 ![](KG1-7.png)
 @snapend
 
+<br>
 <br>
 
 ```r
