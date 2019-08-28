@@ -28,7 +28,13 @@ August 29, 2019
 - Nodes
 - Connected with edges 
   
-  (insert graph example, four vertices triangle+edge and a triod)
+@snap[west span-70]
+![](graph1.png)
+@snapend
+
+@snap[east span-70]
+![](graph2.png)
+@snapend
  
 ---
 
@@ -39,7 +45,9 @@ Its leader is Anaander Mianaai. <br>
 She's many-bodied and divided in at least 2 factions.
 
 
-(insert Knowledge graph derived from this text.) 
+@snap[midpoint span-70]
+![](radch_KG.png)
+@snapend
 
 
 ---
@@ -179,7 +187,7 @@ spacyR
   
 ---
 # Nodes: Entities 
-@snap[north-east span-60]
+@snap[north-east span-50]
 ![](KG1-2.png)
 @snapend
 
@@ -199,9 +207,14 @@ entity_extract(entities, type = 'all', concatenator = "_")
 #4  text1           3             at_least_2    CARDINAL
 ```
 ---
-# Edges: Open information extraction
+# Edges: Open IE
+
+@snap[north-east span-50]
+![](KG1-3.png)
+@snapend
 
 <br>
+
 
 ```r
 text <- "The Radch Empire was created thousands of years ago. 
@@ -219,6 +232,11 @@ getOpenIE(annObj) %>% select(subject, relation, object)
 ```
 ---
 # Ambiguities: Coreference Resolution 
+
+@snap[north-east span-50]
+![](KG1-4.png)
+@snapend
+
 
 <br>
 
@@ -238,12 +256,20 @@ Two coreference clusters:
 
 ---
 
-(insert the knowledge graph here again)
+@snap[midpoint span-70]
+![](radch_KG.png)
+@snapend
 
-### How to query a knowledge graph? 
+### How do we query a knowledge graph? 
 
 ---
 # Find entities: noun phrases 
+
+@snap[north-east span-50]
+![](KG1-5.png)
+@snapend
+
+
 
 <br>
 
@@ -259,6 +285,12 @@ nounphrase_extract(nounphrases, concatenator = "_")
 
 ---
 # Find verbs: parts of speech 
+
+@snap[north-east span-50]
+![](KG1-6.png)
+@snapend
+
+<br>
 ```r
 text <- "When was the Radch Empire founded?"
 pos <- spacy_parse(text, pos = TRUE, tag = TRUE, lemma = FALSE,
@@ -278,6 +310,12 @@ See [annotation specifications](https://spacy.io/api/annotation) for the full ta
 
 ---
 # Pair them up: dependencies 
+
+@snap[north-east span-50]
+![](KG1-7.png)
+@snapend
+
+<br>
 
 ```r
 text <- "When was the Radch Empire founded?"
@@ -302,6 +340,12 @@ dep <- spacy_parse(text, pos = FALSE, tag = FALSE, lemma = FALSE,
 
 ---
 # Relate to the KG: word embeddings
+
+@snap[north-east span-50]
+![](KG1-4.png)
+@snapend
+
+<br>
 
 [Global Vectors for word representation](https://nlp.stanford.edu/projects/glove/)
 
@@ -338,7 +382,9 @@ Cosine similarity scores between:
 # When was the Radch Empire founded?
 
 
-(insert the knowledge graph here with queries relation and nodes highlighted)
+@snap[midpoint span-70]
+![](radch_KG-2.png)
+@snapend
 
 ### Thousands of years ago.
 
