@@ -231,11 +231,10 @@ getOpenIE(annObj) %>% select(subject, relation, object)
 #6          She         has            many-bodied
 ```
 ---
-@snap[north-west span-50]
 # Ambiguities: Coreference Resolution 
-@snapend
 
 @snap[north-east span-50]
+<br>
 ![](KG1-4.png)
 @snapend
 
