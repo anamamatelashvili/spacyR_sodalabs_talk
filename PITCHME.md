@@ -392,12 +392,12 @@ Cosine similarity scores between:
 # When was the Radch Empire founded?
 
 
-@snap[midpoint span-70]
+@snap[east span-70]
 ![](radch_KG-2.png)
 @snapend
 
 
-@snap[south span-100]
+@snap[south-east span-100]
 ### Thousands of years ago.
 @snapend
 
