@@ -95,10 +95,8 @@ We will focus on text processing features needed for knowledge graph building an
 
 
 --- 
-# CoreNLP for R
+# Stanford [CoreNLP](https://stanfordnlp.github.io/CoreNLP/) for R
 By Christopher Manning, Mihai Surdeanu, John Bauer, Jenny Finkel, Steven Bethard, David McClosky
-
-Stanford [coreNLP](https://stanfordnlp.github.io/CoreNLP/)
 
 ```r
 downloadCoreNLP()
@@ -176,11 +174,14 @@ spacyR
 # Workflow for KG
 
 @snap[midpoint span-100]
-![](KG.png)
+![](KG1.png)
 @snapend
   
 ---
 # Nodes: Entities 
+@snap[top-right span-30]
+![](KG1-2.png)
+@snapend
 ```r
 text <- "The Radch Empire was created thousands of years ago. 
          Its leader is Anaander Mianaai. 
