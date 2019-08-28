@@ -179,7 +179,7 @@ spacyR
   
 ---
 # Nodes: Entities 
-@snap[top-right span-30]
+@snap[north-east span-50]
 ![](KG1-2.png)
 @snapend
 ```r
