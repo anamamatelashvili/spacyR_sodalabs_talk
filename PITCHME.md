@@ -90,7 +90,7 @@ We will focus on text processing features needed for knowledge graph building an
 - Wide range of grammatical analysis tools and models 
 - A fast, robust annotator for arbitrary texts, widely used in production
 - Supports multiple human languages 
-- APIs available for many programming languages such as Python and R
+- APIs available for many programming languages (e.g. Python and R)
 
 
 <br>
