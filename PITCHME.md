@@ -106,12 +106,12 @@ We will focus on text processing features needed for knowledge graph building an
 # Stanford [CoreNLP](https://stanfordnlp.github.io/CoreNLP/) for R
 By Christopher Manning, Mihai Surdeanu, John Bauer, Jenny Finkel, Steven Bethard, David McClosky
 
+<br>
+
 ```r
 downloadCoreNLP()
 initCoreNLP(type='english_all')
 ```
-
-<br>
 
 - Needs a lot of memory 
 - Depends on Java
@@ -154,7 +154,7 @@ text <- "The Radch Empire was created thousands of years ago.
 annObj <- annotateString(text)
 
 # Parse text with spaCy
-spacy_parse(text, pos = TRUE, tag = TRUE, lemma = TRUE,
+annotated <- spacy_parse(text, pos = TRUE, tag = TRUE, lemma = TRUE,
                   entity = TRUE, dependency = TRUE, nounphrase = TRUE,
                   multithread = TRUE)
 ```
@@ -232,6 +232,10 @@ getOpenIE(annObj) %>% select(subject, relation, object)
 ```
 ---
 # Ambiguities: Coreference Resolution 
+
+@snap[north-west span-50]
+# Ambiguities: Coreference Resolution 
+@snapend
 
 @snap[north-east span-50]
 ![](KG1-4.png)
