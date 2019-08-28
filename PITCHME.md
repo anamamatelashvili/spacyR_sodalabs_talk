@@ -269,12 +269,14 @@ Two coreference clusters:
 
 
 ---
-@snap[north-west span-50]
 # Find entities: noun phrases 
-@snapend
+
 
 @snap[north-east span-50]
 <br>
+
+<br>
+
 ![](KG1-5.png)
 @snapend
 
@@ -282,7 +284,7 @@ Two coreference clusters:
 
 <br>
 
-<br>
+
 
 ```r
 text <- "When was the Radch Empire founded?"
