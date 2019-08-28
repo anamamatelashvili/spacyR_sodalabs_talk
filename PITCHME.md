@@ -361,8 +361,6 @@ dep <- spacy_parse(text, pos = FALSE, tag = FALSE, lemma = FALSE,
 
 [Global Vectors for word representation](https://nlp.stanford.edu/projects/glove/)
 
-<br>
-
 ```r
 text <- "founded created leader is divided"
 vectors <- spacy_parse(text, pos = FALSE, tag = FALSE, lemma = FALSE,
