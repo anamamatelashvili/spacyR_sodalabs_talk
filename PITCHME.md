@@ -385,14 +385,14 @@ vectors %>% select(token, has_vector, vector_norm)
 
 <br>
 
-@snap[west span-50]
+
 Cosine similarity scores between:
 
 - founded and created: 0.4530104
 - founded and leader: 0.4157298
 - founded and is: 0.2928721
 - founded and divided: 0.2074316
-@snapend
+
 
 
 @snap[east span-50]
