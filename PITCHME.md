@@ -179,9 +179,11 @@ spacyR
   
 ---
 # Nodes: Entities 
-@snap[north-east span-50]
+@snap[north-east span-60]
 ![](KG1-2.png)
 @snapend
+
+<br>
 ```r
 text <- "The Radch Empire was created thousands of years ago. 
          Its leader is Anaander Mianaai. 
