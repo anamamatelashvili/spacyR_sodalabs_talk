@@ -273,9 +273,6 @@ Two coreference clusters:
 
 @snap[north-east span-50]
 <br>
-
-<br>
-
 ![](KG1-5.png)
 @snapend
 
@@ -299,6 +296,7 @@ nounphrase_extract(nounphrases, concatenator = "_")
 # Find verbs: parts of speech 
 
 @snap[north-east span-50]
+<br>
 ![](KG1-6.png)
 @snapend
 
@@ -324,6 +322,7 @@ See [annotation specifications](https://spacy.io/api/annotation) for the full ta
 # Pair them up: dependencies 
 
 @snap[north-east span-50]
+<br>
 ![](KG1-7.png)
 @snapend
 
@@ -354,7 +353,8 @@ dep <- spacy_parse(text, pos = FALSE, tag = FALSE, lemma = FALSE,
 # Relate to the KG: word embeddings
 
 @snap[north-east span-50]
-![](KG1-4.png)
+<br>
+![](KG1-8.png)
 @snapend
 
 <br>
@@ -398,7 +398,12 @@ Cosine similarity scores between:
 ![](radch_KG-2.png)
 @snapend
 
+
+@snap[south span-100]
 ### Thousands of years ago.
+@snapend
+
+
 
 
 --- 
