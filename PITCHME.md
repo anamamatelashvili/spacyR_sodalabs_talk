@@ -390,8 +390,6 @@ Cosine similarity scores between:
 
 - founded and created: 0.4530104
 - founded and leader: 0.4157298
-- founded and is: 0.2928721
-- founded and divided: 0.2074316
 
 
 
