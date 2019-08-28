@@ -141,6 +141,25 @@ spacy_initialize(model = "en_core_web_lg", python_executable = NULL,
 # spacy_finalize()
 ```
 ---
+
+# Key components 
+
+<br>
+
+CoreNLP 
+  - Sentiment scores 
+  - Entity linking 
+  - Coreference resolution
+  - Open information extraction 
+
+spacyR
+  - Preprocessing
+  - Linguistic features 
+  - Word embeddings 
+
+
+
+---
 # Parsing text
 
 <br>
@@ -158,24 +177,6 @@ annotated <- spacy_parse(text, pos = TRUE, tag = TRUE, lemma = TRUE,
                   entity = TRUE, dependency = TRUE, nounphrase = TRUE,
                   multithread = TRUE)
 ```
-
----
-# Key components 
-
-<br>
-
-CoreNLP 
-  - Sentiment scores 
-  - Entity linking 
-  - Coreference resolution
-  - Open information extraction 
-
-spacyR
-  - Preprocessing
-  - Linguistic features 
-  - Word embeddings 
-
-
 
 ---
 
