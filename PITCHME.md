@@ -396,7 +396,7 @@ Cosine similarity scores between:
 
 
 @snap[east span-50]
-![](radch_KG-2.png)
+![](radch_KG.png)
 @snapend
 
 
