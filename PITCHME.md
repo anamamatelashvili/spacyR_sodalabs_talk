@@ -45,7 +45,7 @@ Its leader is Anaander Mianaai. <br>
 She's many-bodied and divided in at least 2 factions.
 
 
-@snap[midpoint span-70]
+@snap[south span-50]
 ![](radch_KG.png)
 @snapend
 
