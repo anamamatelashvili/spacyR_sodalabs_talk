@@ -402,7 +402,7 @@ Cosine similarity scores between:
 # When was the Radch Empire founded?
 
 
-@snap[east span-70]
+@snap[east span-65]
 ![](radch_KG-2.png)
 @snapend
 
